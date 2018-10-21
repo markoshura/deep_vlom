@@ -1,14 +1,35 @@
-def eta(i):
-    q = 2.795*10**(-3)*z*rho/(A*T[i]**(3/2))
-    print(q)
-    return 1/2*math.log(math.pi/6,math.e)-3/2*math.log((math.exp((2/3*q**(2))**(1/3))-1),math.e)
+import matplotlib.pyplot as plt
+import tkinter.filedialog as fd
+import numpy as np
 
-T = [0.01, 0.1, 1, 10]
-z = 79
-a_0 =  0.52917721067*10**(-8)
-Na = 6.022* 10**(23)
-r_0 = 1/a_0*(3/(4*math.pi)*A/(rho*Na))**(1/3)
-A = 196.96657
-rho = 1
 
-eta(0)
+file = fd.askopenfilename()
+inp = open(file,'r')
+newname = file.replace('bin', 'txt')
+outp = open(newname,'w')
+
+for line in inp:
+    a = line.replace(',', '.')
+    outp.write(a)
+
+inp.close()
+outp.close()
+
+a = np.loadtxt(newname, usecols=(1))
+print(a.mean(),'+-', a.std())
+print(a)
+plt.plot(a)
+plt.show()
+transformed = np.fft.fft(a)
+plt.plot(transformed)
+plt.show()
+new_t = transformed[:5000]
+new_sig = np.fft.ifft(new_t)
+print(new_sig.mean(),'+-', new_sig.std())
+plt.plot(new_sig)
+plt.show()
+
+
+
+
+
