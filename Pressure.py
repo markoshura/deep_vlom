@@ -22,21 +22,40 @@ def P_e_approximation(T, rho):
 def P(T, rho):
     return 2.942*10**4*(P_e(T,rho)+theta(T)/volume(rho))
 
-Y_P = [[],[],[],[],[],[]]
-X_rho = [[],[],[],[],[],[]]
+PRESSURE_ISOTERM_RHO =[[],[],[],[],[]]
+RHO =[[],[],[],[],[]]
+k = -3
+while k<2:
+    rho_is = 0.001
+    while rho_is<100:
+        RHO[k+3].append(rho_is)
+        PRESSURE_ISOTERM_RHO[k+3].append(P(10**k,rho_is))
+        rho_is+=1
+    k+=1
+for i in range(5):
+    plt.plot(RHO[i], PRESSURE_ISOTERM_RHO[i])
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel("rho")
+plt.ylabel('P')
+plt.title('PRESSURE isoterm')
+plt.show()
 
-i = -3
-while i<3:
-    T_current = T**i
-    Y_P[0].append(math.log(P(T_current,rho),10))
-    X_rho[0].append(i)
-    i+=0.2
-
-fig = plt.figure()
-
-graph1 = plt.plot(X_rho[0], Y_P[0])
-plt.title('Plot: '+str(1)+' '+'T= '+ str(10))
-
-
-plt.grid(True)
+PRESSURE_ISOTERM_T =[[],[],[],[],[]]
+TT =[[],[],[],[],[]]
+k = -3
+while k<2:
+    T_is = 0.001
+    while T_is<10:
+        TT[k+3].append(T_is)
+        PRESSURE_ISOTERM_T[k+3].append(P(T_is,10**k))
+        T_is+=1
+    k+=1
+for i in range(5):
+    plt.plot(TT[i], PRESSURE_ISOTERM_T[i])
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel("T")
+plt.ylabel('P')
+plt.title('PRESSURE isoterm')
 plt.show()

@@ -25,7 +25,7 @@ def r_0(rho):
 
 #Объём атомной ячейки
 def volume(rho):
-    return 4/2*math.pi*(r_0(rho))**3
+    return 4/3*math.pi*(r_0(rho))**3
 
 
 #Характеристическая температура

@@ -40,4 +40,8 @@ def integral_minus_1_2(x):
 
             return 2 * (0.8862269254528) * i0 * ((1.0 + 1.614 * i0 + (0.4844730731296) * (i0 ** 3.0)) ** (-1.0 / 6.0))
 
+def igrek_sht(x):
+    dx = max(0.14, 0.001 * abs(x))
+    return (-1/2*integral_minus_1_2(x + dx) + 1/2*integral_minus_1_2(x - dx) + 168 * 1/2*integral_minus_1_2(x + dx / 2.0) - 168 * 1/2*integral_minus_1_2(x - dx / 2.0) - 5376 * 1/2*integral_minus_1_2(x + dx / 4.0) + 5376 * 1/2*integral_minus_1_2(x - dx / 4.0) + 32768 * 1/2*integral_minus_1_2(x + dx / 8.0) - 32768 * 1/2*integral_minus_1_2(x - dx / 8.0)) / (5670 * dx)
+
 
