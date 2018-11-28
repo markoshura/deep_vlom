@@ -205,6 +205,13 @@ for i in range(N + 1):
     PHI_S[s_current][i] = Y[i]
     # print(PHI_S[s_current][i])
 
+
+PHI = [0]*(N+1)
+for i in range(N+1):
+    PHI[i] = RESULT3[i]/theta(T)
+
+
+
 #fig = plt.figure()
 #graph1 = plt.plot(X, RESULT0)
 #graph2 = plt.plot(X, RESULT1)

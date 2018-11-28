@@ -144,7 +144,7 @@ def J_Exchange(x):
         cf5 = 4.40494239728169E-6
         cf6 = -2.30871914634807E-6
         cf7 = 1.97582995423813E-7
-        J_Exchange = T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     else:
         exp2x = math.exp(2 * x)
         cf0 = 0.78539816339744830961566084581988

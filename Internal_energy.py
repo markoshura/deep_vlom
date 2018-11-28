@@ -26,7 +26,7 @@ def E_k(T,rho):
 
     max_i = 0
     for i in range(1, N + 1):
-        if RESULT3[i] / (theta(T) * Z[i]) >= 10 ** 6:
+        if RESULT3[i] / (theta(T) * X[i]) >= 10 ** 6:
             max_i = i
     subfunc1 = [0]*(max_i+1)
     subx =[0]*(max_i+1)

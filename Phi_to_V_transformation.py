@@ -18,7 +18,7 @@ V = [0]*(N+1)
 for i in range(N+1):
     R.append(X[i]*r_0(rho))
 
-mu = -theta(T)*eta(T,rho)
+mu = theta(T)*RESULT3[N]
 for i in range(N+1):
     if i==0:
         F[0] = z/theta(T)

@@ -12,7 +12,11 @@ import scipy
 from scipy import integrate
 from State_functions import eta, rho_e
 
-from working_progonka import RESULT3, X
+from working_progonka import RESULT3, X, PHI
+
+Z = [0]*(N+1)
+for i in range(N+1):
+    Z[i] = X[i]**(1/2)
 
 #ЭЛЕКТРОННАЯ ЭНТРОПИЯ
 def S_e(T,rho):
@@ -27,14 +31,14 @@ def S_e(T,rho):
     subfunc1 = [0]*(max_i+1)
     subx =[0]*(max_i+1)
     for i in range(max_i+1):
-        subx[i] = X[i]
+        subx[i] = Z[i]
     nadx = []
     for i in range(max_i+1,N+1):
-        nadx.append(X[i])
+        nadx.append(Z[i])
     for i in range(max_i+1):
-        subfunc1[i] = 1/3*math.pi**2*(RESULT3[i]/theta(T))**(1/2)*X[i]**(3/2)
+        subfunc1[i] = 1/3*math.pi**2*(PHI[i])**(1/2)*Z[i]**(3/2)
     for i in range(max_i+1,N+1):
-        subfunc2.append((5/3*integral_3_2(RESULT3[i]/(theta(T)*X[i])) - RESULT3[i]/(theta(T)*X[i])*integral_1_2(RESULT3[i]/(theta(T)*X[i])))*X[i]**2)
+        subfunc2.append((5/3*integral_3_2(PHI[i]/Z[i])) - (PHI[i]/Z[i])*integral_1_2(PHI[i]/Z[i]))*Z[i]**2
     a1 = scipy.integrate.simps(subfunc1,subx)
     a2 = scipy.integrate.simps(subfunc2,nadx)
 

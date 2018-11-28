@@ -12,7 +12,7 @@ import scipy
 from scipy import integrate
 from State_functions import eta, rho_e
 
-from working_progonka import RESULT3, X
+from working_progonka import PHI, X
 
 
 const = 4*(2*theta(T))**(1/2)/math.pi*r_0(rho)**2
@@ -51,19 +51,19 @@ def hi_function(sigma):
 
         h[i] =(2*i+1)/N**2
 
-        k1[i] = h[i]*const*(1/2*integral_minus_1_2(RESULT3[i]/T[i])*Y[i]+T[i]*igrek_sht(RESULT3[i]/T[i]))
+        k1[i] = h[i]*const*(1/2*integral_minus_1_2(PHI[i]/T[i])*Y[i]+T[i]*igrek_sht(PHI[i]/T[i]))
 
         q1[i] = h[i]*Z[i]
 
-        k2[i] = h[i]*const*(1/2*integral_minus_1_2(((RESULT3[i]+RESULT3[i-1])/2)/((T[i]+T[i-1])/2))*(Y[i]+q1[i]/2)+((T[i]+T[i-1])/2)*igrek_sht((RESULT3[i]+RESULT3[i-1])/2)/((T[i]+T[i-1])/2))
+        k2[i] = h[i]*const*(1/2*integral_minus_1_2(((PHI[i]+PHI[i-1])/2)/((T[i]+T[i-1])/2))*(Y[i]+q1[i]/2)+((T[i]+T[i-1])/2)*igrek_sht((PHI[i]+PHI[i-1])/2)/((T[i]+T[i-1])/2))
 
         q2[i] = h[i]*(Z[i]+k1[i]/2)
 
-        k3[i] = h[i]*const*(1/2*integral_minus_1_2(((RESULT3[i]+RESULT3[i-1])/2)/((T[i]+T[i-1])/2))*(Y[i]+q2[i]/2)+((T[i]+T[i-1])/2)*igrek_sht((RESULT3[i]+RESULT3[i-1])/2)/((T[i]+T[i-1])/2))
+        k3[i] = h[i]*const*(1/2*integral_minus_1_2(((PHI[i]+PHI[i-1])/2)/((T[i]+T[i-1])/2))*(Y[i]+q2[i]/2)+((T[i]+T[i-1])/2)*igrek_sht((PHI[i]+PHI[i-1])/2)/((T[i]+T[i-1])/2))
 
         q3[i] = h[i]*(Z[i]+k2[i]/2)
 
-        k4[i] = h[i]*const*(1/2*integral_minus_1_2(RESULT3[i-1]/T[i-1])*(Y[i]+q3[i])+T[i-1]*igrek_sht(RESULT3[i-1]/T[i-1]))
+        k4[i] = h[i]*const*(1/2*integral_minus_1_2(PHI[i-1]/T[i-1])*(Y[i]+q3[i])+T[i-1]*igrek_sht(PHI[i-1]/T[i-1]))
 
         q4[i] = h[i]*(Z[i]+k3[i])
 
@@ -75,18 +75,18 @@ def hi_function(sigma):
     i = 1
     h[i] = (2 * i + 1) / N ** 2
 
-    k1[i] = h[i] * const * (1 / 2 * integral_minus_1_2(RESULT3[i] / T[i]) * Y[i] + T[i] * igrek_sht(RESULT3[i] / T[i]))
+    k1[i] = h[i] * const * (1 / 2 * integral_minus_1_2(PHI[i] / T[i]) * Y[i] + T[i] * igrek_sht(PHI[i] / T[i]))
 
     q1[i] = h[i] * Z[i]
 
-    k2[i] = h[i] * const * (1 / 2 * integral_minus_1_2(((RESULT3[i] + RESULT3[i - 1]) / 2) / ((T[i] + T[i - 1]) / 2)) * (
-                Y[i] + q1[i] / 2) + ((T[i] + T[i - 1]) / 2) * igrek_sht((RESULT3[i] + RESULT3[i - 1]) / 2) / (
+    k2[i] = h[i] * const * (1 / 2 * integral_minus_1_2(((PHI[i] + PHI[i - 1]) / 2) / ((T[i] + T[i - 1]) / 2)) * (
+                Y[i] + q1[i] / 2) + ((T[i] + T[i - 1]) / 2) * igrek_sht((PHI[i] + PHI[i - 1]) / 2) / (
                                         (T[i] + T[i - 1]) / 2))
 
     q2[i] = h[i] * (Z[i] + k1[i] / 2)
 
-    k3[i] = h[i] * const * (1 / 2 * integral_minus_1_2(((RESULT3[i] + RESULT3[i - 1]) / 2) / ((T[i] + T[i - 1]) / 2)) * (
-                Y[i] + q2[i] / 2) + ((T[i] + T[i - 1]) / 2) * igrek_sht((RESULT3[i] + RESULT3[i - 1]) / 2) / (
+    k3[i] = h[i] * const * (1 / 2 * integral_minus_1_2(((PHI[i] + PHI[i - 1]) / 2) / ((T[i] + T[i - 1]) / 2)) * (
+                Y[i] + q2[i] / 2) + ((T[i] + T[i - 1]) / 2) * igrek_sht((PHI[i] + PHI[i - 1]) / 2) / (
                                         (T[i] + T[i - 1]) / 2))
 
     q3[i] = h[i] * (Z[i] + k2[i] / 2)
@@ -129,7 +129,7 @@ for i in range(N+1):
     HI[i] = Y[i]
     Diff_HI[i] = Z[i]
 
-print(sigma_2)
+print('sigma_2 = ', sigma_2)
 
 
 
