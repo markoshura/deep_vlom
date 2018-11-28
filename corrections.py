@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from math import gamma
 from Changing_parameters import N,T,rho
 from Tabular_values import a_0, Na, E_h
-from Dirak_functions import integral_1_2, integral_3_2, integral_minus_1_2, igrek_sht
+from Dirak_functions import integral_1_2, integral_3_2, integral_minus_1_2, igrek
 
 from Atom_parameters import Atom_weight,z
 from Cell import z_0, r_0, volume, theta

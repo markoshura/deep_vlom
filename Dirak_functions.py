@@ -161,3 +161,5 @@ def J_Exchange(x):
         return cf0 * exp2x * (0.5 - cf1 * math.exp(x) + cf2 * exp2x - cf3 * math.exp(3 * x) + cf4 * math.exp(4 * x) - cf5 * math.exp(5 * x) + cf6 * math.exp(6 * x) - cf7 * math.exp(7 * x) + cf8 * math.exp(8 * x) - cf9 * math.exp(9 * x) + cf10 * math.exp(10 * x))
 
 
+def igrek(x):
+    return 6*J_Exchange(x)+integral_1_2(x)*1/2*integral_minus_1_2(x)
