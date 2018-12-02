@@ -95,7 +95,7 @@ DELTA_E_ISOTERM = [[],[],[],[],[]]
 
 RHO_ISOTERM = [[],[],[],[],[]]
 
-DELTA_E_plus_E_ISOTERM = [[],[],[],[],[]]
+
 
 
 k = -3
@@ -103,7 +103,7 @@ while k<2:
 
     rho_is = 0.001
     while rho_is<100:
-        DELTA_E_plus_E_ISOTERM.append(delta_E(10**k, rho_is)+ E(10**k, rho_is))
+        DEL
 
         DELTA_E_ISOTERM[k+3].append(delta_E(10**k, rho_is))
         RHO_ISOTERM[k+3].append(rho_is)
@@ -112,7 +112,7 @@ while k<2:
 
 for i in range(5):
     plt.plot(RHO_ISOTERM[i], DELTA_E_ISOTERM[i])
-    plt.plot(RHO_ISOTERM[i], DELTA_E_plus_E_ISOTERM[i])
+
 
 plt.xscale('log')
 plt.yscale('log')

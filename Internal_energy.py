@@ -24,11 +24,12 @@ for i in range(N + 1):
 # КИНЕТИЧЕСКАЯ ЭНЕРГИЯ
 def E_k(T, rho):
     subfunc2 = []
+    subfunc22 = []
 
     max_i = 0
 
     for i in range(1, N + 1):
-        if RESULT3[i]/(theta(T)*X[i]) >= 10 ** 6:
+        if PHI[i]/X[i] >= 10 ** 6:
             max_i = i
 
     subfunc1 = [0] * (max_i + 1)
@@ -38,18 +39,20 @@ def E_k(T, rho):
     nadx = []
     for i in range(max_i + 1, N + 1):
         nadx.append(Z[i])
-    proverka = [0] * (max_i+1)
-    for i in range(max_i + 1):
-        subfunc1[i] = 4 / 5 * (RESULT3[i] / theta(T)) ** (5 / 2)
-        proverka[i] = subfunc1[i]
-    for i in range(max_i + 1, N + 1):
 
-        subfunc2.append(2 * Z[i] ** 5 * integral_3_2(RESULT3[i] / (theta(T) * Z[i] ** 2)))
-        #subfunc2.append(X[i]**2*integral_3_2(PHI[i]/X[i]))
+    for i in range(max_i + 1):
+        subfunc1[i] = 4 / 5 * (PHI[i]) ** (5 / 2)
+
+    for i in range(max_i + 1, N + 1):
+        subfunc2.append(X[i]**2*integral_3_2(PHI[i]/X[i]))
+
+
 
 
     a1 = scipy.integrate.simps(subfunc1, subx)
-    a2 = scipy.integrate.trapz(subfunc2, nadx)
+    a2 = scipy.integrate.simps(subfunc2, nadx)
+    print("a1=", a1)
+    print('a2=', a2)
 
 
     return const * (a1 + a2)
@@ -71,24 +74,24 @@ def E(T, rho):
     return 2.626 * 10 ** 3 / Atom_weight * (E_e(T, rho) + 0.76874512 * z ** (7 / 3) + 3 / 2 * theta(T))
 
 
-#ENERGY_ISOTERM_RHO = [[], [], [], [], [],[]]
+#ENERGY_ISOHORE_RHO = [[], [], [], [], [],[]]
 #RHO = [[], [], [], [], [],[]]
 #k = -3
 #while k < 3:
 #    rho_is = 0.001
 #    while rho_is < 100:
 #        RHO[k + 3].append(rho_is)
-#        ENERGY_ISOTERM_RHO[k + 3].append(E(10 ** k, rho_is))
+#        ENERGY_ISOHORE_RHO[k + 3].append(E(10 ** k, rho_is))
 #        rho_is += 0.1
 #    k += 1
-##for i in range(5):
-##    plt.plot(RHO[i], ENERGY_ISOTERM_RHO[i])
+#for i in range(5):
+#    plt.plot(RHO[i], ENERGY_ISOHORE_RHO[i])
 ##plt.xscale('log')
 ##plt.yscale('log')
-##plt.xlabel("rho")
-##plt.ylabel('E')
-##plt.title('Energy isohore')
-##plt.show()
+#plt.xlabel("rho")
+#plt.ylabel('E')
+#plt.title('Energy isohore')
+#plt.show()
 #
 #ENERGY_ISOTERM_T = [[], [], [], [], []]
 #TT = [[], [], [], [], []]
@@ -99,23 +102,19 @@ def E(T, rho):
 #        TT[k + 3].append(T_is)
 #        ENERGY_ISOTERM_T[k + 3].append(E(T_is, 10 ** k))
 #        T_is += 0.1
-#    k += 1
-##for i in range(5):
-##    plt.plot(TT[i], ENERGY_ISOTERM_T[i])
+#    k +=1
+#for i in range(5):
+#    plt.plot(TT[i], ENERGY_ISOTERM_T[i])
 ##plt.xscale('log')
 ##plt.yscale('log')
-##plt.xlabel("T")
-##plt.ylabel('E')
-##plt.title('Energy isoterm')
-##plt.show()
+#plt.xlabel("T")
+#plt.ylabel('E')
+#plt.title('Energy isoterm')
+#plt.show()
 
 print(E_e(0.0000001,0.00000001))
 #должны быть равны
 
 print("E0 = ", -0.76874512*z**(7/3))
-
-
-
-
 
 
