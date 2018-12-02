@@ -216,7 +216,7 @@ for i in range(N+1):
 #graph1 = plt.plot(X, RESULT0)
 #graph2 = plt.plot(X, RESULT1)
 #graph3 = plt.plot(X, RESULT2)
-#graph4 = plt.plot(X, RESULT3)#
+#graph4 = plt.plot(X, RESULT3)
 
 #plt.grid(True)
 #plt.show()

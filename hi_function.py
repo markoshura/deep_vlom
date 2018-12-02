@@ -106,8 +106,8 @@ sigma_2 = sigma_2(1,-1)
 
 
 hi_function(sigma_2)
-print("Y = ", Y)
-print("Z = ", Z)
+#print("Y = ", Y)
+#print("Z = ", Z)
 
 plt.plot(T,Z)
 plt.title("Производная пси (Z)")
@@ -129,7 +129,7 @@ for i in range(N+1):
     HI[i] = Y[i]
     Diff_HI[i] = Z[i]
 
-print('sigma_2 = ', sigma_2)
+#print('sigma_2 = ', sigma_2)
 
 
 
