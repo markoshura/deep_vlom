@@ -12,6 +12,7 @@ from State_functions import eta, rho_e
 
 
 
+
 #ВСЁ ДЛЯ ЛИНЕАРИЗАЦИИ И ПРОГОНКИ С ИТЕРАЦИЯМИ
 s = 5
 s_current = 0
