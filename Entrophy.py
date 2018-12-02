@@ -26,21 +26,21 @@ def S_e(T,rho):
 
     max_i = 0
     for i in range(1, N + 1):
-        if RESULT3[i] / (theta(T) * Z[i]) >= 10 ** 6:
+        if RESULT3[i] / (theta(T) * X[i]) >= 10 ** 6:
             max_i = i
     subfunc1 = [0]*(max_i+1)
     subx =[0]*(max_i+1)
     for i in range(max_i+1):
-        subx[i] = Z[i]
+        subx[i] = X[i]
     nadx = []
     for i in range(max_i+1,N+1):
-        nadx.append(Z[i])
+        nadx.append(X[i])
     for i in range(max_i+1):
-        subfunc1[i] = 1/3*math.pi**2*(PHI[i])**(1/2)*Z[i]**(3/2)
+        subfunc1[i] = 1/3*math.pi**2*(PHI[i])**(1/2)*X[i]**(3/2)
     for i in range(max_i+1,N+1):
-        subfunc2.append(((5/3*integral_3_2(PHI[i]/Z[i])) - (PHI[i]/Z[i])*integral_1_2(PHI[i]/Z[i]))*Z[i]**2)
-    a1 = scipy.integrate.simps(subfunc1,subx)
-    a2 = scipy.integrate.simps(subfunc2,nadx)
+        subfunc2.append(((5/3*integral_3_2(PHI[i]/X[i])) - (PHI[i]/X[i])*integral_1_2(PHI[i]/X[i]))*X[i]**2)
+    a1 = scipy.integrate.trapz(subfunc1,subx)
+    a2 = scipy.integrate.trapz(subfunc2,nadx)
 
     return const*(a1+a2)
 

@@ -38,7 +38,7 @@ def E_k(T, rho):
         subx[i] = Z[i]
     nadx = []
     for i in range(max_i + 1, N + 1):
-        nadx.append(Z[i])
+        nadx.append(X[i])
 
     for i in range(max_i + 1):
         subfunc1[i] = 4 / 5 * (PHI[i]) ** (5 / 2)

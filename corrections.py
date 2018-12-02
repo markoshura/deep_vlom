@@ -41,15 +41,15 @@ def E_integrals(T, rho):
     subfunc2 = []
     subx =[0]*(max_i+1)
     for i in range(max_i+1):
-        subx[i] = Z[i]
+        subx[i] = X[i]
     nadx = []
     for i in range(max_i+1,N+1):
-        nadx.append(Z[i])
+        nadx.append(X[i])
     for i in range(max_i+1):
         subfunc1[i] = 4/3*(11*PHI[i]**2*Z[i]+PHI[i]**(3/2)*HI[i])
     for i in range(max_i+1,N+1):
-        subfunc2.append(Z[i]*HI[i]*integral_1_2(PHI[i]/Z[i])+2*Z[i]**2*igrek(PHI[i]/Z[i]))
-    return scipy.integrate.simps(subfunc1, subx) + scipy.integrate.simps(subfunc2, nadx)
+        subfunc2.append(X[i]*HI[i]*integral_1_2(PHI[i]/X[i])+2*X[i]**2*igrek(PHI[i]/X[i]))
+    return scipy.integrate.trapz(subfunc1, subx) + scipy.integrate.trapz(subfunc2, nadx)
 
 
 def S_integrals(T,rho):
@@ -61,15 +61,15 @@ def S_integrals(T,rho):
     subfunc2 = []
     subx = [0] * (max_i + 1)
     for i in range(max_i + 1):
-        subx[i] = Z[i]
+        subx[i] = X[i]
     nadx = []
     for i in range(max_i + 1, N + 1):
-        nadx.append(Z[i])
+        nadx.append(X[i])
     for i in range(max_i + 1):
         subfunc1[i] = 4 / 3 * (22 * PHI[i] ** 2 * Z[i] + PHI[i] ** (3 / 2) * HI[i])
     for i in range(max_i + 1, N + 1):
-        subfunc2.append(Z[i]*HI[i]*integral_1_2(PHI[i]/Z[i])+4*Z[i]**2*igrek(PHI[i]/Z[i]))
-    return scipy.integrate.simps(subfunc1, subx) + scipy.integrate.simps(subfunc2, nadx)
+        subfunc2.append(X[i]*HI[i]*integral_1_2(PHI[i]/X[i])+4*Z[i]**2*igrek(PHI[i]/X[i]))
+    return scipy.integrate.trapz(subfunc1, subx) + scipy.integrate.trapz(subfunc2, nadx)
 
 
 
@@ -103,8 +103,6 @@ while k<2:
 
     rho_is = 0.001
     while rho_is<100:
-        DEL
-
         DELTA_E_ISOTERM[k+3].append(delta_E(10**k, rho_is))
         RHO_ISOTERM[k+3].append(rho_is)
         rho_is += 0.1
