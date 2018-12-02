@@ -212,6 +212,7 @@ for i in range(N+1):
 
 
 
+
 #fig = plt.figure()
 #graph1 = plt.plot(X, RESULT0)
 #graph2 = plt.plot(X, RESULT1)
