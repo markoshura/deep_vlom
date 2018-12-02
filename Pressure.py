@@ -22,6 +22,7 @@ def P_e_approximation(T, rho):
 def P(T, rho):
     return 2.942*10**4*(P_e(T,rho)+theta(T)/volume(rho))
 
+
 PRESSURE_ISOTERM_RHO =[[],[],[],[],[]]
 RHO =[[],[],[],[],[]]
 k = -3
