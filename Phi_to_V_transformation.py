@@ -11,7 +11,7 @@ from Cell import z_0, r_0, volume, theta
 from State_functions import eta, rho_e
 
 from working_progonka import RESULT3, X
-RESULT_V = [0]*(N)
+RESULT_V = [0]*(N+1)
 R = []
 F = [0]*(N+1)
 V = [0]*(N+1)
@@ -29,17 +29,18 @@ for i in range(1,N+1):
         V[N] = 0
     else:
         V[i] = F[i]/R[i]*theta(T) - mu
-for i in range(N):
+for i in range(N+1):
     if i==0:
         RESULT_V[0] = z
     else:
-        RESULT_V[i] = V[i]*R[i]
-RESULT_R = [0]*N
-for i in range(N):
+        RESULT_V[i] = (V[i]*R[N] + eta(T, rho)*R[i])*theta(T)
+RESULT_R = [0]*(N+1)
+for i in range(N+1):
     RESULT_R[i] = R[i]
 
 fig = plt.figure()
 graph1 = plt.plot(RESULT_R,RESULT_V)
+plt.title('V(r)*r')
 
 plt.grid(True)
 plt.show()

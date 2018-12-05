@@ -13,11 +13,11 @@ from State_functions import eta, rho_e
 
 # ВСЁ ДЛЯ ЛИНЕАРИЗАЦИИ И ПРОГОНКИ С ИТЕРАЦИЯМИ
 
-s = 5
+s = 6
 
 s_current = 0
 
-PHI_S = [[0] * (N + 1)] * 5
+PHI_S = [[0] * (N + 1)] * 6
 X = [0] * (N + 1)
 A = [0] * (N + 1)
 B = [0] * (N + 1)
@@ -205,22 +205,45 @@ for i in range(N + 1):
     PHI_S[s_current][i] = Y[i]
     # print(PHI_S[s_current][i])
 
+a()
+# print("A=", A)
+c()
+# print("C=",C)
+b()
+# print("B=", B)
+d()
+# print("D=", D)
+alpha()
+# print("ALPHA=", ALPHA)
+beta()
+# print("BETA=", BETA)
+y()
+# print("Y=", Y)
+for i in range(N + 1):
+    RESULT4[i] = Y[i] * theta(T)
+s_current = s_current + 1
+
+for i in range(N + 1):
+    PHI_S[s_current][i] = Y[i]
+    # print(PHI_S[s_current][i])
+
 
 PHI = [0]*(N+1)
 for i in range(N+1):
-    PHI[i] = RESULT3[i]/theta(T)
+    PHI[i] = RESULT4[i]/theta(T)
 
 
 
-
-#fig = plt.figure()
-#graph1 = plt.plot(X, RESULT0)
-#graph2 = plt.plot(X, RESULT1)
-#graph3 = plt.plot(X, RESULT2)
-#graph4 = plt.plot(X, RESULT3)
-
-#plt.grid(True)
-#plt.show()
-
+fig = plt.figure()
+graph1 = plt.plot(X, RESULT0)
+graph2 = plt.plot(X, RESULT1)
+graph3 = plt.plot(X, RESULT2)
+graph4 = plt.plot(X, RESULT3)
+graph5 = plt.plot(X, RESULT4)
+#
+#
+plt.grid(True)
+plt.show()
+#
 #plt.plot(X,RESULT3)
 #plt.show()

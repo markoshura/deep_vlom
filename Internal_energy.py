@@ -15,14 +15,16 @@ from Cell import z_0, r_0, volume, theta
 from State_functions import eta, rho_e
 from working_progonka import RESULT3, X, PHI
 
-const = 3 * 2 ** (1 / 2) * volume(rho) * theta(T) ** (5 / 2) / math.pi ** 2
+from Pressure import P_e_approximation
+
+
 Z = [0] * (N + 1)
 for i in range(N + 1):
     Z[i] = X[i] ** (1 / 2)
 
 
 # КИНЕТИЧЕСКАЯ ЭНЕРГИЯ
-def E_k(T, rho):
+def E_k(T, rho): # без константы
     subfunc2 = []
     subfunc22 = []
 
@@ -35,7 +37,7 @@ def E_k(T, rho):
     subfunc1 = [0] * (max_i + 1)
     subx = [0] * (max_i + 1)
     for i in range(max_i + 1):
-        subx[i] = Z[i]
+        subx[i] = X[i]
     nadx = []
     for i in range(max_i + 1, N + 1):
         nadx.append(X[i])
@@ -49,24 +51,24 @@ def E_k(T, rho):
 
 
 
-    a1 = scipy.integrate.simps(subfunc1, subx)
-    a2 = scipy.integrate.simps(subfunc2, nadx)
-    print("a1=", a1)
-    print('a2=', a2)
+    a1 = scipy.integrate.trapz(subfunc1, subx)
+    a2 = scipy.integrate.trapz(subfunc2, nadx)
+    #print("a1=", a1)
+    #print('a2=', a2)
 
 
-    return const * (a1 + a2)
+    return a1 + a2
 
 
 # ПОТЕНЦИАЛЬНАЯ ЭНЕРГИЯ
 def E_p(T, rho):
-    const = 3 * 2 ** (1 / 2) * volume(rho) * theta(T) ** (5 / 2) / math.pi ** 2
-    return const * integral_3_2(-eta(T, rho)) - 2 * E_k(T, rho)
+    const = 2 * 2 ** (1 / 2) * volume(rho) * theta(T) ** (5 / 2) / math.pi ** 2
+    return const * (integral_3_2(-eta(T, rho)) - 3* E_k(T, rho))
 
 
 # ВНУТРЕННЯЯ ЭНЕРГИЯ ЭЛЕКТРОНОВ
 def E_e(T, rho):
-    return E_k(T, rho) + E_p(T, rho)
+    return (2*integral_3_2(-eta(T,rho)) - 3*E_k(T,rho))*2**(1/2)/math.pi**2*theta(T)**(5/2)*4/3*math.pi*r_0(rho)**3
 
 
 # ПОЛНАЯ ЭНЕРГИЯ
@@ -112,9 +114,12 @@ def E(T, rho):
 #plt.title('Energy isoterm')
 #plt.show()
 
-print(E_e(0.0000001,0.00000001))
+print(E_e(0.005,0.0001))
 #должны быть равны
 
-print("E0 = ", -0.76874512*z**(7/3))
+print("E0 = ", -0.76874512421364*z**(7/3))
 
 
+print("3P_e*volume = ", 3*P_e_approximation(T, rho)*volume(rho))
+
+print("2*E_k+E_p = ", 2*E_k(T,rho)+E_p(T,rho))
