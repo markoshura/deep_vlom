@@ -2,7 +2,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 from math import gamma
-from FIX_PROGONKA import PHI
+from working_progonka import PHI
 from Changing_parameters import N,T,rho
 X = [0]*(N+1)
 for i in range(N):
