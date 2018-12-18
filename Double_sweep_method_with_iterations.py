@@ -132,6 +132,9 @@ for i in range(N+1):
     PHI_S[s_current][i] = Y[i]
     #print(PHI_S[s_current][i])
 
+
+
+
 ##a()
 ##print("A=", A)
 #c()
