@@ -23,40 +23,40 @@ def P(T, rho):
     return 2.942*10**4*(P_e(T,rho)+theta(T)/volume(rho))
 
 
-PRESSURE_ISOTERM_RHO =[[],[],[],[],[]]
-RHO =[[],[],[],[],[]]
-k = -3
-while k<2:
-    rho_is = 0.001
-    while rho_is<100:
-        RHO[k+3].append(rho_is)
-        PRESSURE_ISOTERM_RHO[k+3].append(P(10**k,rho_is))
-        rho_is+=1
-    k+=1
-for i in range(5):
-    plt.plot(RHO[i], PRESSURE_ISOTERM_RHO[i])
-plt.xscale('log')
-plt.yscale('log')
-plt.xlabel("rho")
-plt.ylabel('P')
-plt.title('PRESSURE isoterm')
-plt.show()
-
-PRESSURE_ISOTERM_T =[[],[],[],[],[]]
-TT =[[],[],[],[],[]]
-k = -3
-while k<2:
-    T_is = 0.001
-    while T_is<10:
-        TT[k+3].append(T_is)
-        PRESSURE_ISOTERM_T[k+3].append(P(T_is,10**k))
-        T_is+=1
-    k+=1
-for i in range(5):
-    plt.plot(TT[i], PRESSURE_ISOTERM_T[i])
-plt.xscale('log')
-plt.yscale('log')
-plt.xlabel("T")
-plt.ylabel('P')
-plt.title('PRESSURE isoterm')
-plt.show()
+#PRESSURE_ISOTERM_RHO =[[],[],[],[],[]]
+#RHO =[[],[],[],[],[]]
+#k = -3
+#while k<2:
+#    rho_is = 0.001
+#    while rho_is<100:
+#        RHO[k+3].append(rho_is)
+#        PRESSURE_ISOTERM_RHO[k+3].append(P(10**k,rho_is))
+#        rho_is+=1
+#    k+=1
+#for i in range(5):
+#    plt.plot(RHO[i], PRESSURE_ISOTERM_RHO[i])
+#plt.xscale('log')
+#plt.yscale('log')
+#plt.xlabel("rho")
+#plt.ylabel('P')
+#plt.title('PRESSURE isohore')
+#plt.show()
+#
+#PRESSURE_ISOTERM_T =[[],[],[],[],[]]
+#TT =[[],[],[],[],[]]
+#k = -3
+#while k<2:
+#    T_is = 0.001
+#    while T_is<10:
+#        TT[k+3].append(T_is)
+#        PRESSURE_ISOTERM_T[k+3].append(P(T_is,10**k))
+#        T_is+=1
+#    k+=1
+#for i in range(5):
+#    plt.plot(TT[i], PRESSURE_ISOTERM_T[i])
+#plt.xscale('log')
+#plt.yscale('log')
+#plt.xlabel("T")
+#plt.ylabel('P')
+#plt.title('PRESSURE isoterm')
+#plt.show()

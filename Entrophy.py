@@ -12,7 +12,7 @@ import scipy
 from scipy import integrate
 from State_functions import eta, rho_e
 
-from working_progonka import RESULT3, X, PHI
+from working_progonka import  X, PHI
 
 Z = [0]*(N+1)
 for i in range(N+1):
@@ -26,7 +26,7 @@ def S_e(T,rho):
 
     max_i = 0
     for i in range(1, N + 1):
-        if RESULT3[i] / (theta(T) * X[i]) >= 10 ** 6:
+        if PHI[i] / (theta(T) * X[i]) >= 10 ** 6:
             max_i = i
     subfunc1 = [0]*(max_i+1)
     subx =[0]*(max_i+1)

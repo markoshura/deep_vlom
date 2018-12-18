@@ -129,7 +129,7 @@ for i in range(N+1):
     HI[i] = Y[i]
     Diff_HI[i] = Z[i]
 
-#print('sigma_2 = ', sigma_2)
+print('sigma_2 = ', sigma_2)
 
 
 
