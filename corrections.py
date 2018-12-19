@@ -14,7 +14,7 @@ from State_functions import eta, rho_e
 
 from Phi_to_V_transformation import mu
 
-from working_progonka import PHI, X, RESULT3
+from working_progonka import PHI, X
 
 from hi_function import HI, Diff_HI
 
@@ -76,7 +76,7 @@ def S_integrals(T,rho):
 
 #ДАВЛЕНИЕ
 def delta_P(T,rho):
-    return theta(T)**2/(3*math.pi**3)*(HI[N]*integral_1_2(RESULT3[N]) + igrek(RESULT3[N]))
+    return theta(T)**2/(3*math.pi**3)*(HI[N]*integral_1_2(PHI[N]) + igrek(PHI[N]))
 
 
 

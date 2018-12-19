@@ -50,40 +50,40 @@ def S_e(T,rho):
 def S(T,rho):
     return 0.9648*10**2/Atom_weight*(S_e(T,rho)+3/2*math.log(1836*Atom_weight*theta(T)*volume(rho)**(2/3)/2/math.pi,math.e)) + 5/2
 
-#ENTROPHY_ISOTERM_RHO =[[],[],[],[],[]]
-#RHO =[[],[],[],[],[]]
-#k = -3
-#while k<2:
-#    rho_is = 0.001
-#    while rho_is<100:
-#        RHO[k+3].append(rho_is)
-#        ENTROPHY_ISOTERM_RHO[k+3].append(S(10**k,rho_is))
-#        rho_is+=1
-#    k+=1
-#for i in range(5):
-#    plt.plot(RHO[i], ENTROPHY_ISOTERM_RHO[i])
-#plt.xscale('log')
-#plt.yscale('log')
-#plt.xlabel("rho")
-#plt.ylabel('S')
-#plt.title('Entrophy изохора')
-#plt.show()
-#
-#ENTROPHY_ISOTERM_T =[[],[],[],[],[]]
-#TT =[[],[],[],[],[]]
-#k = -3
-#while k<2:
-#    T_is = 0.001
-#    while T_is<10:
-#        TT[k+3].append(T_is)
-#        ENTROPHY_ISOTERM_T[k+3].append(S(T_is,10**k))
-#        T_is+=1
-#    k+=1
-#for i in range(5):
-#    plt.plot(TT[i], ENTROPHY_ISOTERM_T[i])
-#plt.xscale('log')
-#plt.yscale('log')
-#plt.xlabel("T")
-#plt.ylabel('S')
-#plt.title('Entrophy isoterm')
-#plt.show()
+ENTROPHY_ISOTERM_RHO =[[],[],[],[],[]]
+RHO =[[],[],[],[],[]]
+k = -3
+while k<2:
+    rho_is = 0.001
+    while rho_is<100:
+        RHO[k+3].append(rho_is)
+        ENTROPHY_ISOTERM_RHO[k+3].append(S(10**k,rho_is))
+        rho_is+=1
+    k+=1
+for i in range(5):
+    plt.plot(RHO[i], ENTROPHY_ISOTERM_RHO[i])
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel("rho")
+plt.ylabel('S')
+plt.title('Entrophy изохора')
+plt.show()
+
+ENTROPHY_ISOTERM_T =[[],[],[],[],[]]
+TT =[[],[],[],[],[]]
+k = -3
+while k<2:
+    T_is = 0.001
+    while T_is<10:
+        TT[k+3].append(T_is)
+        ENTROPHY_ISOTERM_T[k+3].append(S(T_is,10**k))
+        T_is+=1
+    k+=1
+for i in range(5):
+    plt.plot(TT[i], ENTROPHY_ISOTERM_T[i])
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel("T")
+plt.ylabel('S')
+plt.title('Entrophy isoterm')
+plt.show()
