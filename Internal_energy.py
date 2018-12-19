@@ -76,43 +76,43 @@ def E(T, rho):
     return 2.626 * 10 ** 3 / Atom_weight * (E_e(T, rho) + 0.76874512 * z ** (7 / 3) + 3 / 2 * theta(T))
 
 
-#ENERGY_ISOHORE_RHO = [[], [], [], [], [],[]]
-#RHO = [[], [], [], [], [],[]]
-#k = -3
-#while k < 3:
-#    rho_is = 0.001
-#    while rho_is < 100:
-#        RHO[k + 3].append(rho_is)
-#        ENERGY_ISOHORE_RHO[k + 3].append(E(10 ** k, rho_is))
-#        rho_is += 0.1
-#    k += 1
-#for i in range(5):
-#    plt.plot(RHO[i], ENERGY_ISOHORE_RHO[i])
-##plt.xscale('log')
-##plt.yscale('log')
-#plt.xlabel("rho")
-#plt.ylabel('E')
-#plt.title('Energy isohore')
-#plt.show()
-#
-#ENERGY_ISOTERM_T = [[], [], [], [], []]
-#TT = [[], [], [], [], []]
-#k = -3
-#while k < 2:
-#    T_is = 0.001
-#    while T_is < 10:
-#        TT[k + 3].append(T_is)
-#        ENERGY_ISOTERM_T[k + 3].append(E(T_is, 10 ** k))
-#        T_is += 0.1
-#    k +=1
-#for i in range(5):
-#    plt.plot(TT[i], ENERGY_ISOTERM_T[i])
-##plt.xscale('log')
-##plt.yscale('log')
-#plt.xlabel("T")
-#plt.ylabel('E')
-#plt.title('Energy isoterm')
-#plt.show()
+ENERGY_ISOHORE_RHO = [[], [], [], [], [],[]]
+RHO = [[], [], [], [], [],[]]
+k = -3
+while k < 3:
+    rho_is = 0.001
+    while rho_is < 100:
+        RHO[k + 3].append(rho_is)
+        ENERGY_ISOHORE_RHO[k + 3].append(E(10 ** k, rho_is))
+        rho_is += 0.1
+    k += 1
+for i in range(5):
+    plt.plot(RHO[i], ENERGY_ISOHORE_RHO[i])
+#plt.xscale('log')
+#plt.yscale('log')
+plt.xlabel("rho")
+plt.ylabel('E')
+plt.title('Energy isohore')
+plt.show()
+
+ENERGY_ISOTERM_T = [[], [], [], [], []]
+TT = [[], [], [], [], []]
+k = -3
+while k < 2:
+    T_is = 0.001
+    while T_is < 10:
+        TT[k + 3].append(T_is)
+        ENERGY_ISOTERM_T[k + 3].append(E(T_is, 10 ** k))
+        T_is += 0.1
+    k +=1
+for i in range(5):
+    plt.plot(TT[i], ENERGY_ISOTERM_T[i])
+#plt.xscale('log')
+#plt.yscale('log')
+plt.xlabel("T")
+plt.ylabel('E')
+plt.title('Energy isoterm')
+plt.show()
 
 print(E_e(0.005,0.0001))
 #должны быть равны
