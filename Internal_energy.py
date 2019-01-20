@@ -114,7 +114,7 @@ plt.ylabel('E')
 plt.title('Energy isoterm')
 plt.show()
 
-print(E_e(0.005,0.0001))
+print(E_e(0.0001,0.0001))
 #должны быть равны
 
 print("E0 = ", -0.76874512421364*z**(7/3))

@@ -122,12 +122,17 @@ def progonka(s):
 
 
 progonka(s)
-#fig = plt.figure()
-#for s_current in range(s):
-#    graph1 = plt.plot(X, RESULT[s_current])
+fig = plt.figure()
+for s_current in range(s):
+    graph1 = plt.plot(X, RESULT[s_current])
+plt.title("T = 0 keV")
+plt.grid(True)
 
-#plt.grid(True)
-#plt.show()
+plt.xlabel('x')
+plt.ylabel('y(s)')
+plt.savefig('progonka1')  
+plt.show()
+
 
 
 #K = [0]*(N)
