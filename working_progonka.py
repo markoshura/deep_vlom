@@ -150,3 +150,4 @@ plt.show()
 PHI = [0]*(N+1)
 for i in range(N+1):
     PHI[i] = RESULT[9][i]/theta(T)
+

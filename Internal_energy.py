@@ -29,7 +29,7 @@ def E_k(T, rho): # c константой
     max_i = 0
 
     for i in range(1, N + 1):
-        if PHI[i]/X[i] >= 10 ** 6:
+        if PHI[i]/X[i] >= 10:
             max_i = i
 
     subfunc1 = [0] * (max_i + 1)
@@ -64,7 +64,7 @@ def E_p(T, rho):
     max_i = 0
 
     for i in range(1, N + 1):
-        if PHI[i]/X[i] >= 10 ** 6:
+        if PHI[i]/X[i] >= 10:
             max_i = i
 
     subfunc1 = [0] * (max_i + 1)
@@ -73,20 +73,23 @@ def E_p(T, rho):
         subx[i] = Z[i]
     nadx = []
     for i in range(max_i + 1, N + 1):
-        nadx.append(X[i])
+        nadx.append(Z[i])
 
     for i in range(max_i + 1):
         subfunc1[i] = 4 / 5 * (PHI[i]) ** (5 / 2)
 
     for i in range(max_i + 1, N + 1):
-        subfunc2.append(X[i]**2*integral_3_2(PHI[i]/X[i]))
+        subfunc2.append(2*Z[i]**5*integral_3_2(PHI[i]/Z[i]**2))
 
 
 
 
     a1 = scipy.integrate.simps(subfunc1, subx)
-    a2 = scipy.integrate.trapz(subfunc2, nadx)
+    a2 = scipy.integrate.simps(subfunc2, nadx)
+
+
     return const * (integral_3_2(-eta(T, rho)) - 3*(a1+a2))
+
 print(E_k(T,rho))
 print(E_p(T, rho))
 # ВНУТРЕННЯЯ ЭНЕРГИЯ ЭЛЕКТРОНОВ

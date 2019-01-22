@@ -17,7 +17,7 @@ def eta(T,rho):
 
 #Заряд ядра
 def z_0(T, rho):
-    return 317.5 * Atom_weight * pow(T, (3 / 2))*2/(np.pi**(1/2)) * integral_1_2(-eta(T,rho))/(rho)
+    return 317.5 * Atom_weight * T**(3/2)*2/(np.pi**(1/2)) * integral_1_2(-eta(T,rho))/(rho)
 
 #Средний радиус атомной ячейки
 def r_0(rho):

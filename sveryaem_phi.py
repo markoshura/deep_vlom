@@ -2066,4 +2066,6 @@ for i in range(N+1):
 plt.plot(raznost)
 plt.title('raznost')
 plt.show()
+print(PHI[0], PHI[1])
+print(kakaxa[0], kakaxa[1])
 
