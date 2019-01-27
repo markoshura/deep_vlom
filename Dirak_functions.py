@@ -1,53 +1,23 @@
 # ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
 
-import math
-import scipy
-from scipy import integrate
-import numpy
+from math import exp, log
+
 
 # Функция Ферми-Дирака I_1/2
-#def integral_1_2(x):
-#    sqx = x ** (1 / 2)
-#    xsqx = x * sqx
-#    # Апроксимация функции дирака трёхчленной формулой при k=1/2
-#    if (x >= 176868.709):
-#        return xsqx / 1.5 + 0.82246703342411321823620758332301 / sqx + 0.71027462212293443818237742585514 / (x * xsqx);
-#    elif (x < -17.9):
-#        return 0.88622692545275801364908374167057 * math.exp(x)
-#    else:
-#        if (x > 30.0):
-#            i0 = x
-#        else:
-#            i0 = math.log(1.0 + math.exp(x), math.e)
-#
-#        return (0.8862269254528) * i0 * ((1.0 + 1.178 * i0 + (0.1812102675) * (i0 ** 3.0)) ** (1.0 / 6.0))
-
-    # Функция Ферми-Дирака I_3/2
-
-
 def integral_1_2(x):
-
-    if (x >= 11.3387569186980):
+    if x >= 11.3387569186980:
         cf0 = 0.66666666666666666666666666666667
         cf1 = 0.82246703342411321823620758332301
-
         cf2 = 0.71027462212293443818237742585514
-
         cf3 = 6.4676790366394178706460075419325
-
         cf4 = 161.81003209778554550730737279001
-
         cf5 = 7910.4611636304157044525143038231
-
         cf6 = 639228.93009607374534030839048086
-
-        sqx = (x)**(1/2)
+        sqx = x**(1/2)
         xsqx = x * sqx
         return cf0 * xsqx + cf1 / sqx + cf2 / (x * xsqx) + cf3 * x ** (-4.5) + cf4 * x ** (-6.5) + cf5 * x ** (
             -8.5) + cf6 * x ** (-10.5)
-
-
-    if(x >= 4.0):
+    if x >= 4.:
 
         kFac = 3.7412658332723
         bFac = 7.669378459349
@@ -59,7 +29,7 @@ def integral_1_2(x):
         cf5 = -5.28315415383895E-4
         cf6 = 7.3725235229416E-5
         cf7 = -7.85685230858535E-6
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     if(x >= 1.0):
 
         kFac = 1.52938673731248
@@ -72,7 +42,7 @@ def integral_1_2(x):
         cf5 = 1.44380980075215E-4
         cf6 = -2.13928516805129E-5
         cf7 = 8.75136440994795E-7
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     if(x >= -1.0):
 
         kFac = 1.00979557910416
@@ -85,9 +55,9 @@ def integral_1_2(x):
         cf5 = -4.14664028570017E-5
         cf6 = 4.99257622935817E-6
         cf7 = 6.02330849600041E-7
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     else:
-        expx = math.exp(x)
+        expx = exp(x)
         cf0 = 0.88622692545275801364908374167057
         cf1 = 0.35355339059327376220042218105242
         cf2 = 0.19245008972987525483638292683399
@@ -100,8 +70,8 @@ def integral_1_2(x):
         cf9 = 0.03162277660168379331998893544433
         cf10 = 0.02741012223434214751334655154273
         return cf0 * expx * (
-                    1.0 - cf1 * expx + cf2 * math.exp(2 * x) - cf3 * math.exp(3 * x) + cf4 * math.exp(4 * x) - cf5 * math.exp(5 * x) + cf6 * math.exp(
-                6 * x) - cf7 * math.exp(7 * x) + cf8 * math.exp(8 * x) - cf9 * math.exp(9 * x) + cf10 * math.exp(10 * x))
+                    1.0 - cf1 * expx + cf2 * exp(2 * x) - cf3 * exp(3 * x) + cf4 * exp(4 * x) - cf5 * exp(5 * x) + cf6 * exp(
+                6 * x) - cf7 * exp(7 * x) + cf8 * exp(8 * x) - cf9 * exp(9 * x) + cf10 * exp(10 * x))
 
 
 
@@ -146,7 +116,7 @@ def integral_3_2(x):
         cf5 = 1.15494755799039E-3
         cf6 = -1.2412400150752E-4
         cf7 = 1.28217367911798E-5
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     if(x >= 1.0):
 
         kFac = 1.52938673731248
@@ -159,7 +129,7 @@ def integral_3_2(x):
         cf5 = -4.39693320860579E-5
         cf6 = 2.74602973946436E-5
         cf7 = -3.60319354575367E-6
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     if(x >= -0.994315794013506):
 
         kFac = 1.00979557910416
@@ -172,9 +142,9 @@ def integral_3_2(x):
         cf5 = -6.0503775127313E-5
         cf6 = -5.3080886762355E-6
         cf7 = 5.55544635783695E-7
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     else:
-        expx = math.exp(x)
+        expx = exp(x)
         cf0 = 1.3293403881791370204736256125059
 
         cf1 = 0.17677669529663688110021109052621
@@ -187,7 +157,7 @@ def integral_3_2(x):
         cf8 = 0.00411522633744855967078189300412
         cf9 = 0.00316227766016837933199889354443
         return cf0 * expx * (
-                    1.0 - cf1 * expx + cf2 * math.exp(2 * x) - cf3 * math.exp(3 * x) + cf4 * math.exp(4 * x) - cf5 * math.exp(5 * x) + cf6 * math.exp(6 * x) - cf7 * math.exp(7 * x) + cf8 * math.exp(8 * x) - cf9 * math.exp(9 * x))
+                    1.0 - cf1 * expx + cf2 * exp(2 * x) - cf3 * exp(3 * x) + cf4 * exp(4 * x) - cf5 * exp(5 * x) + cf6 * exp(6 * x) - cf7 * exp(7 * x) + cf8 * exp(8 * x) - cf9 * exp(9 * x))
 
 
 
@@ -219,7 +189,7 @@ def integral_sht_1_2(x):
         cf5 = 1.54915440589765E-4
         cf6 = -2.32936819710705E-5
         cf7 = 2.5576672906813E-6
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     if (x >= 2.0):
 
         kFac = 1.52938673731248
@@ -232,7 +202,7 @@ def integral_sht_1_2(x):
         cf5 = -6.9968597482345E-5
         cf6 = 1.1832233943701E-5
         cf7 = -1.05617309310857E-6
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     if(x >= 0.1):
 
         kFac = 0.968611600297902
@@ -245,7 +215,7 @@ def integral_sht_1_2(x):
         cf5 = 3.14448992345257E-5
         cf6 = -6.36486853874962E-6
         cf7 = -2.2190206207251E-8
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     if(x >= -1.48379997482724):
 
         kFac = 0.807836463283327
@@ -258,9 +228,9 @@ def integral_sht_1_2(x):
         cf5 = -8.90734317890093E-6
         cf6 = 2.35121259154966E-6
         cf7 = 2.33461109401187E-7
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     else:
-        expx = math.exp(x)
+        expx = exp(x)
         cf0 = 0.88622692545275801364908374167057
         cf1 = 0.70710678118654752440084436210485
         cf2 = 0.57735026918962576450914878050196
@@ -273,8 +243,8 @@ def integral_sht_1_2(x):
         cf9 = 0.31622776601683793319988935444327
         cf10 = 0.30151134457776362264681206697006
         return cf0 * expx * (
-                    1.0 - cf1 * expx + cf2 * math.exp(2 * x) - cf3 * math.exp(3 * x) + cf4 * math.exp(4 * x) - cf5 * math.exp(5 * x) + cf6 * math.exp(
-                6 * x) - cf7 * math.exp(7 * x) + cf8 * math.exp(8 * x) - cf9 * math.exp(9 * x) + cf10 * math.exp(10 * x))
+                    1.0 - cf1 * expx + cf2 * exp(2 * x) - cf3 * exp(3 * x) + cf4 * exp(4 * x) - cf5 * exp(5 * x) + cf6 * exp(
+                6 * x) - cf7 * exp(7 * x) + cf8 * exp(8 * x) - cf9 * exp(9 * x) + cf10 * exp(10 * x))
 
 
 
@@ -282,28 +252,26 @@ def integral_minus_1_2(x):
     return 2*integral_sht_1_2(x)
 
 
-
-
 def igrek_sht(x):
     dx = max(0.14, 0.001 * abs(x))
     return (-1/2*integral_minus_1_2(x + dx) + 1/2*integral_minus_1_2(x - dx) + 168 * 1/2*integral_minus_1_2(x + dx / 2.0) - 168 * 1/2*integral_minus_1_2(x - dx / 2.0) - 5376 * 1/2*integral_minus_1_2(x + dx / 4.0) + 5376 * 1/2*integral_minus_1_2(x - dx / 4.0) + 32768 * 1/2*integral_minus_1_2(x + dx / 8.0) - 32768 * 1/2*integral_minus_1_2(x - dx / 8.0)) / (5670 * dx)
 
 
+# Сумма полиномов Чебышева
+def t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7):
+    xT = (x - bFac) / kFac
+    x2T = xT**2
+    x3T = xT**3
+    x4T = xT**4
+    x5T = xT**5
+    x6T = xT**6
+    x7T = xT**7
+    return cf0 + cf1 * xT + cf2 * (2. * x2T - 1.) + cf3 * (4.*x3T - 3. * xT) + cf4 * (8. * x4T - 8. * x2T + 1.) + \
+           cf5 * (16. * x5T - 20. * x3T + 5. * xT) + cf6 * (32. * x6T - 48. * x4T + 18. * x2T - 1.) + \
+           cf7 * (64. * x7T - 112. * x5T + 56. * x3T - 7. * xT)
 
-#Сумма полиномов Чебышева
-def T7_Cheb(x,kFac,bFac,cf0,cf1,cf2,cf3,cf4,cf5,cf6,cf7):
-    xT=(x-bFac)/kFac
-    x2T=xT*xT
-    x3T=xT**3
-    x4T=xT**4
-    x5T=xT**5
-    x6T=xT**6
-    x7T=xT**7
-    return cf0+cf1*xT+cf2*(2.0*x2T-1.0)+cf3*(4.0*x3T-3.0*xT)+cf4*(8.0*x4T-8.0*x2T+1.0)+cf5*(16.0*x5T-20.0*x3T+5.0*xT)+cf6*(32.0*x6T-48.0*x4T+18.0*x2T-1.0)+cf7*(64.0*x7T-112.0*x5T+56.0*x3T-7.0*xT)
 
-
-#Аппроксимация только обменного интеграла(без членов для ТФП)
-
+# Аппроксимация только обменного интеграла(без членов для ТФП)
 def J_Exchange(x):
 
     if (x >= 15.0):
@@ -321,7 +289,7 @@ def J_Exchange(x):
         cf8 = 1.603501910160424576402142699306101*10**8
         bFac = 0.383705176155388
         x2 = x * x
-        return  bFac + cf1 * math.log(x) + cf2 * x2 + cf3 / x2 + cf4 * x ** (-4) + cf5 * x ** (-6) + cf6 * x ** (-8)
+        return  bFac + cf1 * log(x) + cf2 * x2 + cf3 / x2 + cf4 * x ** (-4) + cf5 * x ** (-6) + cf6 * x ** (-8)
     if (x >= 7.0):
 
         kFac = 4.07836463283327
@@ -334,7 +302,7 @@ def J_Exchange(x):
         cf5 = -1.5956682533913*10**(-4)
         cf6 = 2.53521759603359*10**(-5)
         cf7 = -3.28663978321764*10**(-6)
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     if(x >= 3.0):
 
         kFac = 2.03918231641664
@@ -347,7 +315,7 @@ def J_Exchange(x):
         cf5 = 1.91871819682721E-4
         cf6 = -4.6674660811763E-5
         cf7 = 7.50800003121444E-6
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     if(x >= 1.0):
 
         kFac = 1.01959115820832
@@ -360,7 +328,7 @@ def J_Exchange(x):
         cf5 = 3.99027652310952E-5
         cf6 = 5.61013783821618E-6
         cf7 = -1.10487782678526E-6
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     if(x >= 0.0):
         kFac = 0.509795579104159
         bFac = 0.5
@@ -372,7 +340,7 @@ def J_Exchange(x):
         cf5 = -5.25135086302045E-6
         cf6 = 5.26130988671991E-8
         cf7 = 2.20201508919354E-8
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     if(x >= -1.48387892035288):
 
         kFac = 0.757346684328119
@@ -385,9 +353,9 @@ def J_Exchange(x):
         cf5 = 4.40494239728169E-6
         cf6 = -2.30871914634807E-6
         cf7 = 1.97582995423813E-7
-        return T7_Cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
+        return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
     else:
-        exp2x = math.exp(2 * x)
+        exp2x = exp(2 * x)
         cf0 = 0.78539816339744830961566084581988
         cf1 = 0.47140452079103168293389624140323
         cf2 = 0.41367513459481288225457439025098
@@ -399,7 +367,7 @@ def J_Exchange(x):
         cf8 = 0.22113507376025144455650756499489
         cf9 = 0.20502010799708259411082291098565
         cf10 = 0.19111818527221522950993007500165
-        return cf0 * exp2x * (0.5 - cf1 * math.exp(x) + cf2 * exp2x - cf3 * math.exp(3 * x) + cf4 * math.exp(4 * x) - cf5 * math.exp(5 * x) + cf6 * math.exp(6 * x) - cf7 * math.exp(7 * x) + cf8 * math.exp(8 * x) - cf9 * math.exp(9 * x) + cf10 * math.exp(10 * x))
+        return cf0 * exp2x * (0.5 - cf1 * exp(x) + cf2 * exp2x - cf3 * exp(3 * x) + cf4 * exp(4 * x) - cf5 * exp(5 * x) + cf6 * exp(6 * x) - cf7 * exp(7 * x) + cf8 * exp(8 * x) - cf9 * exp(9 * x) + cf10 * exp(10 * x))
 
 
 def igrek(x):

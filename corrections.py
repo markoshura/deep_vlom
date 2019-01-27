@@ -10,7 +10,6 @@ from Atom_parameters import Atom_weight,z
 from Cell import z_0, r_0, volume, theta
 import scipy
 from scipy import integrate
-from State_functions import eta, rho_e
 
 from Phi_to_V_transformation import mu
 
