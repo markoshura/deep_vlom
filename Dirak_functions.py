@@ -13,12 +13,10 @@ def integral_1_2(x):
         cf4 = 161.81003209778554550730737279001
         cf5 = 7910.4611636304157044525143038231
         cf6 = 639228.93009607374534030839048086
-        sqx = x**(1/2)
+        sqx = x**0.5
         xsqx = x * sqx
-        return cf0 * xsqx + cf1 / sqx + cf2 / (x * xsqx) + cf3 * x ** (-4.5) + cf4 * x ** (-6.5) + cf5 * x ** (
-            -8.5) + cf6 * x ** (-10.5)
-    if x >= 4.:
-
+        return cf0 * xsqx + cf1 / sqx + cf2 / (x * xsqx) + cf3 * x**(-4.5) + cf4 * x**(-6.5) + cf5 * x**(-8.5) + cf6 * x**(-10.5)
+    elif x >= 4.:
         kFac = 3.7412658332723
         bFac = 7.669378459349
         cf0 = 1.51207468889284E1
@@ -30,8 +28,7 @@ def integral_1_2(x):
         cf6 = 7.3725235229416E-5
         cf7 = -7.85685230858535E-6
         return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
-    if(x >= 1.0):
-
+    elif x >= 1.:
         kFac = 1.52938673731248
         bFac = 2.5
         cf0 = 3.3979043386056E0
@@ -43,8 +40,7 @@ def integral_1_2(x):
         cf6 = -2.13928516805129E-5
         cf7 = 8.75136440994795E-7
         return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
-    if(x >= -1.0):
-
+    elif x >= -1.:
         kFac = 1.00979557910416
         bFac = 9.79557910415929E-3
         cf0 = 7.68271155111739E-1
@@ -70,42 +66,27 @@ def integral_1_2(x):
         cf9 = 0.03162277660168379331998893544433
         cf10 = 0.02741012223434214751334655154273
         return cf0 * expx * (
-                    1.0 - cf1 * expx + cf2 * exp(2 * x) - cf3 * exp(3 * x) + cf4 * exp(4 * x) - cf5 * exp(5 * x) + cf6 * exp(
+                    1. - cf1 * expx + cf2 * exp(2 * x) - cf3 * exp(3 * x) + cf4 * exp(4 * x) - cf5 * exp(5 * x) + cf6 * exp(
                 6 * x) - cf7 * exp(7 * x) + cf8 * exp(8 * x) - cf9 * exp(9 * x) + cf10 * exp(10 * x))
 
 
-
-
-
-
 def integral_3_2_1(x):
-    return 3 / 10 * integral_1_2(x) * (125 + 60 * integral_1_2(x) + 18 * (integral_1_2(x)) ** 2) ** (1 / 3)
-
+    return 0.3 * integral_1_2(x) * (125 + 60 * integral_1_2(x) + 18 * integral_1_2(x)**2)**(1/3)
 
 
 def integral_3_2(x):
-
-    if (x >= 10.3392439415065):
+    if x >= 10.3392439415065:
         cf0 = 0.4
         cf1 = 2.467401100272339654708622749969
-
         cf2 = -0.71027462212293443818237742585514
-
         cf3 = -2.7718624442740362302768603751139
-
         cf4 = -44.13000875394151241108382894273
-
         cf5 = -15821.16373906104901524376218556
-
         cf6 = -100930.88369938006505373290376014
-
-        sqx = x**(1/2)
+        sqx = x**0.5
         xsqx = x * sqx
-        return cf0 * x * xsqx + cf1 * sqx + cf2 / xsqx + cf3 * x ** (-3.5) + cf4 * x ** (-5.5) + cf5 * x ** (-7.5) + cf6 * x ** (-9.5)
-
-
-    if(x >= 4.0):
-
+        return cf0 * x * xsqx + cf1 * sqx + cf2 / xsqx + cf3 * x**(-3.5) + cf4 * x**(-5.5) + cf5 * x**(-7.5) + cf6 * x**(-9.5)
+    elif x >= 4.:
         kFac = 3.23171853624284
         bFac = 7.16962197075325
         cf0 = 7.19740367036291E1
@@ -117,8 +98,7 @@ def integral_3_2(x):
         cf6 = -1.2412400150752E-4
         cf7 = 1.28217367911798E-5
         return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
-    if(x >= 1.0):
-
+    elif x >= 1.:
         kFac = 1.52938673731248
         bFac = 2.5
         cf0 = 8.95753044162565E0
@@ -130,8 +110,7 @@ def integral_3_2(x):
         cf6 = 2.74602973946436E-5
         cf7 = -3.60319354575367E-6
         return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
-    if(x >= -0.994315794013506):
-
+    elif x >= -0.994315794013506:
         kFac = 1.00979557910416
         bFac = 9.79557910415929E-3
         cf0 = 1.37154508993631E0
@@ -146,7 +125,6 @@ def integral_3_2(x):
     else:
         expx = exp(x)
         cf0 = 1.3293403881791370204736256125059
-
         cf1 = 0.17677669529663688110021109052621
         cf2 = 0.06415002990995841827879430894466
         cf3 = 0.03125
@@ -157,28 +135,21 @@ def integral_3_2(x):
         cf8 = 0.00411522633744855967078189300412
         cf9 = 0.00316227766016837933199889354443
         return cf0 * expx * (
-                    1.0 - cf1 * expx + cf2 * exp(2 * x) - cf3 * exp(3 * x) + cf4 * exp(4 * x) - cf5 * exp(5 * x) + cf6 * exp(6 * x) - cf7 * exp(7 * x) + cf8 * exp(8 * x) - cf9 * exp(9 * x))
-
+                    1. - cf1 * expx + cf2 * exp(2 * x) - cf3 * exp(3 * x) + cf4 * exp(4 * x) - cf5 * exp(5 * x) + cf6 * exp(6 * x) - cf7 * exp(7 * x) + cf8 * exp(8 * x) - cf9 * exp(9 * x))
 
 
 def integral_sht_1_2(x):
-
-    if (x >= 12.3383454886052):
+    if x >= 12.3383454886052:
         cf1 = -0.41123351671205660911810379166151
-
         cf2 = -1.7756865553073360954559435646379
         cf3 = -29.104555664877380417907033938696
         cf4 = -1051.7652086356060457974979231351
         cf5 = -67238.919890858533487846371582496
         cf6 = -671190.766008774326073238100049
-        sqx = (x)**(1/2)
+        sqx = x**0.5
         xsqx = x * sqx
-        return sqx + cf1 / xsqx + cf2 * x ** (-3.5) + cf3 * x ** (-5.5) + cf4 * x ** (-7.5) + cf5 * x ** (
-            -9.5) + cf6 * x ** (-11.5)
-
-
-    if(x >= 5.0):
-
+        return sqx + cf1 / xsqx + cf2 * x**(-3.5) + cf3 * x**(-5.5) + cf4 * x**(-7.5) + cf5 * x**(-9.5) + cf6 * x**(-11.5)
+    elif x >= 5.:
         kFac = 3.74105608802988
         bFac = 8.6691727443026
         cf0 = 2.88629626904533E0
@@ -190,8 +161,7 @@ def integral_sht_1_2(x):
         cf6 = -2.32936819710705E-5
         cf7 = 2.5576672906813E-6
         return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
-    if (x >= 2.0):
-
+    elif x >= 2.:
         kFac = 1.52938673731248
         bFac = 3.5
         cf0 = 1.76901709231739E0
@@ -203,8 +173,7 @@ def integral_sht_1_2(x):
         cf6 = 1.1832233943701E-5
         cf7 = -1.05617309310857E-6
         return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
-    if(x >= 0.1):
-
+    elif x >= 0.1:
         kFac = 0.968611600297902
         bFac = 1.05
         cf0 = 9.31863691623603E-1
@@ -216,8 +185,7 @@ def integral_sht_1_2(x):
         cf6 = -6.36486853874962E-6
         cf7 = -2.2190206207251E-8
         return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
-    if(x >= -1.48379997482724):
-
+    elif x >= -1.48379997482724:
         kFac = 0.807836463283327
         bFac = -0.692163536716673
         cf0 = 3.52718780769978E-1
@@ -243,18 +211,17 @@ def integral_sht_1_2(x):
         cf9 = 0.31622776601683793319988935444327
         cf10 = 0.30151134457776362264681206697006
         return cf0 * expx * (
-                    1.0 - cf1 * expx + cf2 * exp(2 * x) - cf3 * exp(3 * x) + cf4 * exp(4 * x) - cf5 * exp(5 * x) + cf6 * exp(
+                    1. - cf1 * expx + cf2 * exp(2 * x) - cf3 * exp(3 * x) + cf4 * exp(4 * x) - cf5 * exp(5 * x) + cf6 * exp(
                 6 * x) - cf7 * exp(7 * x) + cf8 * exp(8 * x) - cf9 * exp(9 * x) + cf10 * exp(10 * x))
 
 
-
 def integral_minus_1_2(x):
-    return 2*integral_sht_1_2(x)
+    return 2 * integral_sht_1_2(x)
 
 
 def igrek_sht(x):
     dx = max(0.14, 0.001 * abs(x))
-    return (-1/2*integral_minus_1_2(x + dx) + 1/2*integral_minus_1_2(x - dx) + 168 * 1/2*integral_minus_1_2(x + dx / 2.0) - 168 * 1/2*integral_minus_1_2(x - dx / 2.0) - 5376 * 1/2*integral_minus_1_2(x + dx / 4.0) + 5376 * 1/2*integral_minus_1_2(x - dx / 4.0) + 32768 * 1/2*integral_minus_1_2(x + dx / 8.0) - 32768 * 1/2*integral_minus_1_2(x - dx / 8.0)) / (5670 * dx)
+    return (-1/2 * integral_minus_1_2(x + dx) + 1/2 * integral_minus_1_2(x - dx) + 168 * 1/2 * integral_minus_1_2(x + dx / 2.) - 168 * 1/2 * integral_minus_1_2(x - dx / 2.) - 5376 * 1/2 * integral_minus_1_2(x + dx / 4.) + 5376 * 1/2 * integral_minus_1_2(x - dx / 4.) + 32768 * 1/2 * integral_minus_1_2(x + dx / 8.) - 32768 * 1/2 * integral_minus_1_2(x - dx / 8.)) / (5670 * dx)
 
 
 # Сумма полиномов Чебышева
@@ -273,38 +240,32 @@ def t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7):
 
 # Аппроксимация только обменного интеграла(без членов для ТФП)
 def J_Exchange(x):
-
-    if (x >= 15.0):
+    if x >= 15.:
         bFac = 0.383708729538668
         cf1 = -0.82246703342411321823620758332301
-
         cf2 = 0.5
         cf3 = 1.691130052673653424243755775845575
-
         cf4 = 14.18716691908001339367511331778745
-
         cf5 = 346.0733028286156983792120782023865
         cf6 = 16688.67955429090163804075587296032
-        cf7 = 1.336392345120319416764032215294369*10**8
-        cf8 = 1.603501910160424576402142699306101*10**8
+        cf7 = 1.336392345120319416764032215294369E+8
+        cf8 = 1.603501910160424576402142699306101E+8
         bFac = 0.383705176155388
         x2 = x * x
-        return  bFac + cf1 * log(x) + cf2 * x2 + cf3 / x2 + cf4 * x ** (-4) + cf5 * x ** (-6) + cf6 * x ** (-8)
-    if (x >= 7.0):
-
+        return  bFac + cf1 * log(x) + cf2 * x2 + cf3 / x2 + cf4 * x**(-4) + cf5 * x**(-6) + cf6 * x**(-8)
+    elif x >= 7.:
         kFac = 4.07836463283327
         bFac = 11
         cf0 = 6.31198547629997E1
         cf1 = 4.45291937700006E1
         cf2 = 4.1939724684287E0
-        cf3 = -5.37494213520073*10**(-3)
-        cf4 = 9.20354291643832*10**(-4)
-        cf5 = -1.5956682533913*10**(-4)
-        cf6 = 2.53521759603359*10**(-5)
-        cf7 = -3.28663978321764*10**(-6)
+        cf3 = -5.37494213520073E-3
+        cf4 = 9.20354291643832E-4
+        cf5 = -1.5956682533913E-4
+        cf6 = 2.53521759603359E-5
+        cf7 = -3.28663978321764E-6
         return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
-    if(x >= 3.0):
-
+    elif x >= 3.:
         kFac = 2.03918231641664
         bFac = 5
         cf0 = 1.27326204335739E1
@@ -316,8 +277,7 @@ def J_Exchange(x):
         cf6 = -4.6674660811763E-5
         cf7 = 7.50800003121444E-6
         return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
-    if(x >= 1.0):
-
+    elif x >= 1.:
         kFac = 1.01959115820832
         bFac = 2
         cf0 = 2.20669406679466E0
@@ -329,7 +289,7 @@ def J_Exchange(x):
         cf6 = 5.61013783821618E-6
         cf7 = -1.10487782678526E-6
         return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
-    if(x >= 0.0):
+    elif x >= 0.:
         kFac = 0.509795579104159
         bFac = 0.5
         cf0 = 4.27168174319067E-1
@@ -341,8 +301,7 @@ def J_Exchange(x):
         cf6 = 5.26130988671991E-8
         cf7 = 2.20201508919354E-8
         return t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7)
-    if(x >= -1.48387892035288):
-
+    elif x >= -1.48387892035288:
         kFac = 0.757346684328119
         bFac = -0.742653315671881
         cf0 = 8.41142629137387E-2
@@ -367,8 +326,8 @@ def J_Exchange(x):
         cf8 = 0.22113507376025144455650756499489
         cf9 = 0.20502010799708259411082291098565
         cf10 = 0.19111818527221522950993007500165
-        return cf0 * exp2x * (0.5 - cf1 * exp(x) + cf2 * exp2x - cf3 * exp(3 * x) + cf4 * exp(4 * x) - cf5 * exp(5 * x) + cf6 * exp(6 * x) - cf7 * exp(7 * x) + cf8 * exp(8 * x) - cf9 * exp(9 * x) + cf10 * exp(10 * x))
+        return cf0 * exp2x * (0.5 - cf1 * exp(x) + cf2 * exp2x - cf3 * exp(3. * x) + cf4 * exp(4. * x) - cf5 * exp(5. * x) + cf6 * exp(6. * x) - cf7 * exp(7. * x) + cf8 * exp(8. * x) - cf9 * exp(9. * x) + cf10 * exp(10. * x))
 
 
 def igrek(x):
-    return 6*J_Exchange(x)+integral_1_2(x)*1/2*integral_minus_1_2(x)
+    return 6 * J_Exchange(x) + integral_1_2(x) * 1/2 * integral_minus_1_2(x)

@@ -20,7 +20,7 @@ def z_0(T, rho):
 
 # Средний радиус атомной ячейки
 def r_0(rho):
-    return (1 / a_0) * (3 / (4 * pi) * Atom_weight / (rho * Na))**(1/3)
+    return 8.07699585 #(1 / a_0) * (3 / (4 * pi) * Atom_weight / (rho * Na))**(1/3)
 
 
 # Объём атомной ячейки
@@ -41,3 +41,5 @@ def rho_e(T, rho):
 # Потенциал в модели ППЭ
 def V(r, rho):
     return z / r * (1 - 3/2 * r / r_0(rho) + 1/2 * (r / r_0(rho))**3)
+
+print(z_0(0.001, 1))

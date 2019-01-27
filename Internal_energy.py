@@ -9,6 +9,9 @@ from Changing_parameters import N
 from Dirak_functions import integral_3_2
 from Cell import volume, theta, eta
 from working_progonka import X, PHI
+# from sveryaem_phi import kakaxa_phi as PHI, kakaxa_x as X
+# from Pressure import P_e
+from Changing_parameters import T, rho
 
 Z = [(i / N) for i in range(N + 1)]
 
@@ -20,13 +23,20 @@ def E_sub_int(T, rho):
         max_i += 1
 
     integr_int_1 = [Z[i] for i in range(max_i + 1)]
-    integr_int_2 = [Z[i] for i in range(max_i + 1, N + 1)]
+    # integr_int_2 = [Z[i] for i in range(max_i + 1, N + 1)]
+    integr_int_2 = [X[i] for i in range(max_i + 1, N + 1)]
 
     integr_func_1 = [4/5 * PHI[i]**2.5 for i in range(max_i + 1)]
-    integr_func_2 = [2 * Z[i]**5 * integral_3_2(PHI[i] / Z[i]**2) for i in range(max_i + 1, N + 1)]
+    # integr_func_2 = [2 * Z[i]**5 * integral_3_2(PHI[i] / Z[i]**2) for i in range(max_i + 1, N + 1)]
+    integr_func_2 = [X[i] ** 2 * integral_3_2(PHI[i] / X[i]) for i in range(max_i + 1, N + 1)]
 
     integr_res_1 = integrate.simps(integr_func_1, integr_int_1)
-    integr_res_2 = integrate.simps(integr_func_2, integr_int_2)
+    integr_res_2 = integrate.cumtrapz(integr_func_2, integr_int_2)[-1]
+
+    # Очень нечестно
+    # integr_int = [X[i] for i in range(1, N + 1)]
+    # integr_func = [X[i]**2 * integral_3_2(PHI[i] / X[i]) for i in range(1, N + 1)]
+    # integr_res = integrate.cumtrapz(integr_func, integr_int)[-1]
 
     return integr_res_1 + integr_res_2
 
@@ -39,6 +49,12 @@ def E_k(T, rho):
 # ПОТЕНЦИАЛЬНАЯ ЭНЕРГИЯ
 def E_p(T, rho):
     return (2 * 2**0.5 / pi**2) * volume(rho) * theta(T)**2.5 * (integral_3_2(-eta(T, rho)) - 3 * E_sub_int(T, rho))
+
+# Проверяем virial theorem
+# print(2 * E_k(T, rho) + E_p(T, rho))
+# print(3 * P_e(T, rho) * volume(rho))
+print(E_p(T, rho))
+print(E_k(T, rho))
 
 
 # ВНУТРЕННЯЯ ЭНЕРГИЯ ЭЛЕКТРОНОВ
@@ -70,7 +86,7 @@ for i in range(5):
 plt.xscale('log')
 plt.yscale('log')
 plt.xlabel('rho')
-plt.ylabel('P')
+plt.ylabel('E')
 plt.title('ENERGY isotherm')
 plt.grid('true')
 # plt.savefig('enertherm')
@@ -96,7 +112,7 @@ for i in range(5):
 plt.xscale('log')
 plt.yscale('log')
 plt.xlabel("T")
-plt.ylabel('P')
+plt.ylabel('E')
 plt.grid('true')
 plt.title('ENERGY isohore')
 # plt.savefig('enerhore')
