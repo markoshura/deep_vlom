@@ -42,4 +42,4 @@ def rho_e(T, rho):
 def V(r, rho):
     return z / r * (1 - 3/2 * r / r_0(rho) + 1/2 * (r / r_0(rho))**3)
 
-print(z_0(0.001, 1))
+# print(z_0(0.001, 1))
