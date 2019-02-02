@@ -2,7 +2,7 @@
 N = 2048
 
 # Температура
-T = 0.001
+Temperature_system = 10
 
 # Плотность
-rho = 1
+rho_system = 1
