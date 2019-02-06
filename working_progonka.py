@@ -6,7 +6,7 @@ from math import pi
 from Changing_parameters import N, Temperature_system, rho_system
 from Dirak_functions import integral_1_2, integral_minus_1_2
 from Atom_parameters import z
-from Cell import r_0, theta, eta
+from Cell import r_0, theta, eta_0
 
 # Число итераций
 s = 9
@@ -36,7 +36,7 @@ def progonka(T, rho):
         if i == 0:
             PHI_S[0][0] = z / (theta(T) * r_0(rho))
         else:
-            PHI_S[0][i] = z / (theta(T) * r_0(rho)) * (1 - 3 / 2 * X[i] + 1 / 2 * (X[i]) ** 3) - eta(T, rho) * X[i]
+            PHI_S[0][i] = z / (theta(T) * r_0(rho)) * (1 - 3 / 2 * X[i] + 1 / 2 * (X[i]) ** 3) - eta_0(T, rho) * X[i]
 
     s_current = 0
 
@@ -76,23 +76,26 @@ def progonka(T, rho):
         s_current += 1
     PHI = [RESULT[8][i] / theta(T) for i in range(N + 1)]
 
-   # #СТРОИМ ГРАФИК
-   # fig = plt.figure()
-   # for i in range(s):
-   #     graph1 = plt.plot(X, RESULT[i])
-   # plt.title("T = 0 keV")
-   # plt.grid(True)
-   #
-   # plt.xlabel('x')
-   # plt.ylabel('y(s)')
-   # plt.savefig('progonka1')
-   # plt.show()
-
+    ##СТРОИМ ГРАФИК
+    #fig = plt.figure()
+    #for i in range(s):
+    #    graph1 = plt.plot(X, PHI)
+    #plt.title("T = 0 keV")
+    #plt.grid(True)
+    #
+    #plt.xlabel('x')
+    #plt.ylabel('y(s)')
+    #plt.savefig('progonka1')
+    #plt.show()
 
     return PHI
 
 
 #progonka(Temperature_system, rho_system)
+
+def eta(T, rho):
+    PHI = progonka(T, rho)
+    return - PHI[N]
 
 
 

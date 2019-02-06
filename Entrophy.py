@@ -1,14 +1,13 @@
 from math import pi, log, e
 import matplotlib.pyplot as plt
-from Changing_parameters import N, Temperature_system, rho_system
-from Tabular_values import a_0, Na, E_h
-from Dirak_functions import integral_1_2, integral_3_2, integral_minus_1_2
+from Changing_parameters import N
+from Dirak_functions import integral_1_2, integral_3_2
 
 from Atom_parameters import Atom_weight,z
-from Cell import z_0, r_0, volume, theta , eta
+from Cell import z_0, r_0, volume, theta
 from scipy import integrate
 
-from working_progonka import  X, progonka
+from working_progonka import X, progonka, eta
 
 Z = [0]*(N+1)
 for i in range(N+1):
@@ -23,48 +22,27 @@ def S(T, rho):
     PHI = progonka(T, rho)
 
     # ВСПОМ. ИНТЕГРАЛ
-    def S_sub_int_3_2(T, rho):
+    def S_sub_int(T, rho):
 
-        max_i = 1
+        max_i = 2
         while PHI[max_i] / X[max_i] >= 10**3:
             max_i += 1
 
-        integr_int_1 = [Z[i] for i in range(max_i + 1)]
-        integr_int_2 = [Z[i] for i in range(max_i, N + 1)]
+        integr_int_1 = [X[i] for i in range(max_i + 1)]
+        integr_int_2 = [X[i] for i in range(max_i, N + 1)]
 
-        integr_func_1 = [4/5 * PHI[i]**2.5 for i in range(max_i + 1)]
-        integr_func_2 = [2 * Z[i]**5 * integral_3_2(PHI[i] / Z[i]**2) for i in range(max_i, N + 1)]
+        integr_func_1 = [1/3 * pi**2 * PHI[i]**0.5 * X[i]**1.5 for i in range(max_i + 1)]
+        integr_func_2 = [(5/3 * integral_3_2(PHI[i]/X[i]) - PHI[i]/X[i] * integral_1_2(PHI[i]/X[i])) * X[i]**2 for i in range(max_i, N + 1)]
 
-        integr_res_1 = integrate.simps(integr_func_1, integr_int_1)
-        integr_res_2 = integrate.simps(integr_func_2, integr_int_2)
-
-        return integr_res_1 + integr_res_2
-
-    # ВСПОМ. ИНТЕГРАЛ
-    def S_sub_int_1_2(T, rho):
-
-        max_i = 1
-        while PHI[max_i] / X[max_i] >= 10**3:
-            max_i += 1
-
-        integr_int_1 = [Z[i] for i in range(max_i + 1)]
-        integr_int_2 = [Z[i] for i in range(max_i, N + 1)]
-
-        integr_func_1 = [4/5 * PHI[i]**2.5 for i in range(max_i + 1)]
-        integr_func_2 = [2 * Z[i]**5 * integral_3_2(PHI[i] / Z[i]**2) for i in range(max_i, N + 1)]
-
-
-        integr_res_1 = integrate.simps(integr_func_1, integr_int_1)
-        integr_res_2 = integrate.simps(integr_func_2, integr_int_2)
-
+        integr_res_1 = integrate.trapz(integr_func_1, integr_int_1)
+        integr_res_2 = integrate.trapz(integr_func_2, integr_int_2)
 
         return integr_res_1 + integr_res_2
-
 
     #ЭЛЕКТРОННАЯ ЭНТРОПИЯ
     def S_e(T,rho):
         const = 4*2**(1/2)*theta(T)**(3/2)*r_0(rho)**3/pi
-        return const * (5/3 * S_sub_int_3_2(T, rho) - S_sub_int_1_2(T, rho))
+        return const * S_sub_int(T, rho)
 
 
 
@@ -87,6 +65,8 @@ while k < 2:
         while rho_is < i * 10:
             RHO[k + 3].append(rho_is)
             ENTROPHY_ISOTHERM_RHO[k+3].append(S(10**k, rho_is))
+
+            print(rho_is, S(10**k, rho_is))
             rho_is += i
     k += 1
 
@@ -113,6 +93,7 @@ while k < 2:
         while T_is < i * 10:
             TT[k+3].append(T_is)
             ENTROPHY_ISOHORE_T[k+3].append(S(T_is, 10**k))
+            print(T_is, S(T_is, 10**k))
             T_is += i
 
     k += 1

@@ -1,10 +1,7 @@
 # СВЕРКА С ДАННЫМИ МАКСИМА
 
-import matplotlib.pyplot as plt
-from working_progonka import PHI, X
-from Changing_parameters import N
 
-kakaxa_phi = [266.15087300,
+excel_phi = [266.15087300,
 266.14693800,
 266.13517500,
 266.11564300,
@@ -2054,7 +2051,12 @@ kakaxa_phi = [266.15087300,
 -0.3607690990,
 -0.3611271010
 ]
-kakaxa_x = [
+
+
+
+
+
+excel_x = [
 0,
 0.000000238418579,
 0.000000953674316,
@@ -4106,17 +4108,17 @@ kakaxa_x = [
 1
 ]
 
-razn_phi = [kakaxa_phi[i] - PHI[i] for i in range(N+1)]
-razn_x = [kakaxa_x[i] - X[i] for i in range(N+1)]
-
-# plt.plot(razn_phi)
-# plt.title('raznost_phi')
-# plt.show()
-# print(PHI[0], PHI[1])
-# print(kakaxa_phi[0], kakaxa_phi[1])
+#razn_phi = [excel_phi[i] - PHI[i] for i in range(N+1)]
+#razn_x = [excel_x[i] - X[i] for i in range(N+1)]
 #
-# plt.plot(razn_x)
-# plt.title('raznost_x')
-# plt.show()
-# print(X[0], X[1])
-# print(kakaxa_x[0], kakaxa_x[1])
+## plt.plot(razn_phi)
+## plt.title('raznost_phi')
+## plt.show()
+## print(PHI[0], PHI[1])
+## print(kakaxa_phi[0], kakaxa_phi[1])
+##
+## plt.plot(razn_x)
+## plt.title('raznost_x')
+## plt.show()
+## print(X[0], X[1])
+## print(kakaxa_x[0], kakaxa_x[1])

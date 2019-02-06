@@ -7,10 +7,13 @@ from Tabular_values import a_0, Na, E_h
 from Atom_parameters import Atom_weight, z
 
 
+
 # Безразмерный потенциал
-def eta(T, rho):
+def eta_0(T, rho):
     q = 2.795 * 10**(-3) * z * rho / (Atom_weight * T**1.5)
     return 0.5 * log(pi / 6, e) - 1.5 * log((exp((2/3 * q**2)**(1/3))-1), e)
+    #return 0.361127101
+
 
 
 # Заряд ядра
