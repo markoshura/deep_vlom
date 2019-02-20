@@ -1,9 +1,7 @@
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-from math import gamma
-from Changing_parameters import N,T,rho
-from Tabular_values import a_0, Na, E_h
+from Changing_parameters import N
 from Dirak_functions import integral_1_2, integral_3_2, integral_minus_1_2, igrek
 
 from Atom_parameters import Atom_weight,z
@@ -11,13 +9,12 @@ from Cell import z_0, r_0, volume, theta
 import scipy
 from scipy import integrate
 
-from Phi_to_V_transformation import mu
 
-from working_progonka import PHI, X
 
-from hi_function import HI, Diff_HI
+from working_progonka import progonka, X
 
-from Internal_energy import E
+from hi_function import hi
+
 
 #ПОПРАВКИ К МОДЕЛИ ТОМАСА-ФЕРМИ
 
@@ -30,6 +27,9 @@ a2 = 0
 b = 0
 
 def E_integrals(T, rho):
+
+    HI = hi(T, rho)
+    PHI = progonka(T, rho)
 
 
     max_i = 0
@@ -52,6 +52,8 @@ def E_integrals(T, rho):
 
 
 def S_integrals(T,rho):
+    HI = hi(T, rho)
+    PHI = progonka(T, rho)
     max_i = 0
     for i in range(1, N + 1):
         if PHI[i] / X[i] >= 10 ** 6:
@@ -75,6 +77,8 @@ def S_integrals(T,rho):
 
 #ДАВЛЕНИЕ
 def delta_P(T,rho):
+    HI = hi(T, rho)
+    PHI = progonka(T, rho)
     return theta(T)**2/(3*math.pi**3)*(HI[N]*integral_1_2(PHI[N]) + igrek(PHI[N]))
 
 
@@ -82,41 +86,43 @@ def delta_P(T,rho):
 def delta_E(T,rho):
     return 2*theta(T)**2/(3*math.pi**2)*r_0(rho)**3*E_integrals(T,rho) + 0.2690017*z**(5/3)
 
-def delta_S(T,rho):
-    return 2*theta(T)/(3*math.pi**2)*r_0(rho)**2*S_integrals(T,rho) + 2**(1/2)*z*Diff_HI[0]/(6*math.pi*theta(T)**(1/2))
+#def delta_S(T,rho):
+#    return 2*theta(T)/(3*math.pi**2)*r_0(rho)**2*S_integrals(T,rho) + 2**(1/2)*z*Diff_HI[0]/(6*math.pi*theta(T)**(1/2))
 
 
 def delta_mu(T, rho):
+    HI = hi(T, rho)
+    PHI = progonka(T, rho)
     return (2*theta(T))**(1/2)/(6*math.pi)*(1/2*integral_minus_1_2(PHI[N]) + HI[N])
 
 
-DELTA_E_ISOTERM = [[],[],[],[],[]]
-
-RHO_ISOTERM = [[],[],[],[],[]]
-
-
-
-
-k = -3
-while k<2:
-
-    rho_is = 0.001
-    while rho_is<100:
-        DELTA_E_ISOTERM[k+3].append(delta_E(10**k, rho_is))
-        RHO_ISOTERM[k+3].append(rho_is)
-        rho_is += 0.1
-    k+=1
-
-for i in range(5):
-    plt.plot(RHO_ISOTERM[i], DELTA_E_ISOTERM[i])
-
-
-plt.xscale('log')
-plt.yscale('log')
-plt.xlabel("rho")
-plt.ylabel('E')
-plt.title('Delta Energy isoterm')
-plt.show()
+#DELTA_E_ISOTERM = [[],[],[],[],[]]
+#
+#RHO_ISOTERM = [[],[],[],[],[]]
+#
+#
+#
+#
+#k = -3
+#while k<2:
+#
+#    rho_is = 0.001
+#    while rho_is<100:
+#        DELTA_E_ISOTERM[k+3].append(delta_E(10**k, rho_is))
+#        RHO_ISOTERM[k+3].append(rho_is)
+#        rho_is += 0.1
+#    k+=1
+#
+#for i in range(5):
+#    plt.plot(RHO_ISOTERM[i], DELTA_E_ISOTERM[i])
+#
+#
+#plt.xscale('log')
+#plt.yscale('log')
+#plt.xlabel("rho")
+#plt.ylabel('E')
+#plt.title('Delta Energy isoterm')
+#plt.show()
 
 
 

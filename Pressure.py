@@ -5,8 +5,9 @@ import matplotlib.pyplot as plt
 from math import pi
 from Dirak_functions import integral_3_2
 from Cell import volume, theta,  rho_e
-from Changing_parameters import Temperature_system, rho_system
-from working_progonka import eta
+from Changing_parameters import N
+from working_progonka import eta, progonka
+
 
 
 # Давление электронов
@@ -16,12 +17,14 @@ def P_e(T, rho):
 
 # Аппроксимация давления электронного газа
 def P_e_approximation(T, rho):
-    return rho_e(T, rho) * (theta(T)**3 + 3.36 * rho_e(T, rho) * theta(T)**1.5 + 9/125 * pi**4 * rho_e(T, rho)**2)**(1/3)
+    return rho_e(T, rho) * (abs(theta(T))**3 + 3.36 * rho_e(T, rho) * theta(T)**1.5 + 9/125 * pi**4 * rho_e(T, rho)**2)**(1/3)
 
 
 # Полное давление (ГПа)
 def P(T, rho):
-    return (P_e(T, rho) + theta(T) / volume(rho))
+    PHI = progonka (T, rho)
+    #return (P_e(T, rho) + theta(T) / volume(rho))
+    return 32 / (3 * pi**3) * (2 / pi)**(2 / 3) * (2**(7/6) * 3**(2/3) * pi**(-5 / 3) * theta(T)**(1/2) * volume(rho)**(2/3) * (PHI[0])**2)**(-5 / 3) * integral_3_2(PHI[N])
 
 
 #PRESSURE_ISOTHERM_RHO = [[], [], [], [], []]
@@ -76,4 +79,4 @@ def P(T, rho):
 ## plt.savefig('preshore')
 #plt.show()
 
-print(P_e(Temperature_system, rho_system))
+#print(P_e(Temperature_system, rho_system))

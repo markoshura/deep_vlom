@@ -1,7 +1,8 @@
 # ПАРАМЕТРЫ ЯЧЕЙКИ
 
+import numpy as np
 
-from math import pi, e, log, exp
+from math import pi, log
 from Dirak_functions import integral_1_2
 from Tabular_values import a_0, Na, E_h
 from Atom_parameters import Atom_weight, z
@@ -11,7 +12,12 @@ from Atom_parameters import Atom_weight, z
 # Безразмерный потенциал
 def eta_0(T, rho):
     q = 2.795 * 10**(-3) * z * rho / (Atom_weight * T**1.5)
-    return 0.5 * log(pi / 6, e) - 1.5 * log((exp((2/3 * q**2)**(1/3))-1), e)
+    try:
+        res = 0.5 * log(pi / 6) - 1.5 * log((np.exp((2/3 * q**2)**(1/3), dtype=np.float64)-1))
+    except OverflowError:
+        print('Overflow epta!')
+        res = float('inf')
+    return res
     #return 0.361127101
 
 
