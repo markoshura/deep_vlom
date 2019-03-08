@@ -13,7 +13,7 @@ from scipy import integrate
 
 from working_progonka import progonka, X
 
-from hi_function import hi
+from hi_function import hi_function
 
 
 #ПОПРАВКИ К МОДЕЛИ ТОМАСА-ФЕРМИ
@@ -28,7 +28,7 @@ b = 0
 
 def E_integrals(T, rho):
 
-    HI = hi(T, rho)
+    HI = hi_function(T, rho)
     PHI = progonka(T, rho)
 
 
@@ -52,7 +52,7 @@ def E_integrals(T, rho):
 
 
 def S_integrals(T,rho):
-    HI = hi(T, rho)
+    HI = hi_function(T, rho)
     PHI = progonka(T, rho)
     max_i = 0
     for i in range(1, N + 1):
@@ -77,7 +77,7 @@ def S_integrals(T,rho):
 
 #ДАВЛЕНИЕ
 def delta_P(T,rho):
-    HI = hi(T, rho)
+    HI = hi_function(T, rho)
     PHI = progonka(T, rho)
     return theta(T)**2/(3*math.pi**3)*(HI[N]*integral_1_2(PHI[N]) + igrek(PHI[N]))
 

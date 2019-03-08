@@ -220,8 +220,17 @@ def integral_minus_1_2(x):
 
 
 def igrek_sht(x):
-    dx = max(0.14, 0.001 * abs(x))
-    return (-1/2 * integral_minus_1_2(x + dx) + 1/2 * integral_minus_1_2(x - dx) + 168 * 1/2 * integral_minus_1_2(x + dx / 2.) - 168 * 1/2 * integral_minus_1_2(x - dx / 2.) - 5376 * 1/2 * integral_minus_1_2(x + dx / 4.) + 5376 * 1/2 * integral_minus_1_2(x - dx / 4.) + 32768 * 1/2 * integral_minus_1_2(x + dx / 8.) - 32768 * 1/2 * integral_minus_1_2(x - dx / 8.)) / (5670 * dx)
+    #dx = max(0.14, 0.001 * abs(x))
+    #return (-1/2 * integral_minus_1_2(x + dx) + 1/2 * integral_minus_1_2(x - dx) + 168 * 1/2 * integral_minus_1_2(x + dx / 2.) - 168 * 1/2 * integral_minus_1_2(x - dx / 2.) - 5376 * 1/2 * integral_minus_1_2(x + dx / 4.) + 5376 * 1/2 * integral_minus_1_2(x - dx / 4.) + 32768 * 1/2 * integral_minus_1_2(x + dx / 8.) - 32768 * 1/2 * integral_minus_1_2(x - dx / 8.)) / (5670 * dx)
+
+    dx = integral_sht_1_2(x)
+    return 7 * dx * dx + integral_1_2(x) * D2_I12(x)
+
+def D2_I12(x):
+
+    dx = max(0.14, 0.001*abs(x))
+    return (-integral_sht_1_2(x+dx)+integral_sht_1_2(x-dx)+168*integral_sht_1_2(x+dx/2.0)-168*integral_sht_1_2(x-dx/2.0)-5376*integral_sht_1_2(x+dx/4.0)+5376*integral_sht_1_2(x-dx/4.0)+32768*integral_sht_1_2(x+dx/8.0)-32768*integral_sht_1_2(x-dx/8.0))/(5670*dx)
+
 
 
 # Сумма полиномов Чебышева
