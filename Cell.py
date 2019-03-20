@@ -10,7 +10,7 @@ from Atom_parameters import Atom_weight, z
 
 
 # Безразмерный потенциал
-def eta_0(T, rho):
+def eta_0(T, rho, Atom_weight):
     q = 2.795 * 10**(-3) * z * rho / (Atom_weight * T**1.5)
     try:
         res = 0.5 * log(pi / 6) - 1.5 * log((np.exp((2/3 * q**2)**(1/3), dtype=np.float64)-1))
@@ -23,12 +23,12 @@ def eta_0(T, rho):
 
 
 # Заряд ядра
-def z_0(T, rho):
+def z_0(T, rho, Atom_weight):
     return 317.5 * Atom_weight * T**1.5 * 2 * integral_1_2(-eta(T, rho)) / pi**0.5 / rho
 
 
 # Средний радиус атомной ячейки
-def r_0(rho):
+def r_0(rho, Atom_weight):
     return (1 / a_0) * (3 / (4 * pi) * Atom_weight / (rho * Na))**(1/3)
 
 

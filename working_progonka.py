@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from math import pi
 from Changing_parameters import N, Temperature_system, rho_system
 from Dirak_functions import integral_1_2, integral_minus_1_2
-from Atom_parameters import z
+#from Atom_parameters import z
 from Cell import r_0, theta, eta_0
 
 # Число итераций
@@ -24,9 +24,9 @@ A = [0] + [1 / (X[i] - X[i - 1]) for i in range(1, N)]
 C = [0] + [1 / (X[i + 1] - X[i]) for i in range(1, N)]
 
 
-def progonka(T, rho):
+def progonka(T, rho, Atom_weight, z):
     # константа а в уравнении
-    const_a = 4 * (2 * theta(T)) ** 0.5 / pi * (r_0(rho)) ** 2
+    const_a = 4 * (2 * theta(T)) ** 0.5 / pi * (r_0(rho, Atom_weight)) ** 2
 
     PHI_S = [[0 for i in range(N + 1)] for j in range(s + 1)]
     RESULT = [[0 for i in range(N + 1)] for j in range(s)]
@@ -34,9 +34,9 @@ def progonka(T, rho):
 
     for i in range(N + 1):
         if i == 0:
-            PHI_S[0][0] = z / (theta(T) * r_0(rho))
+            PHI_S[0][0] = z / (theta(T) * r_0(rho, Atom_weight))
         else:
-            PHI_S[0][i] = z / (theta(T) * r_0(rho)) * (1 - 3 / 2 * X[i] + 1 / 2 * (X[i]) ** 3) - eta_0(T, rho) * X[i]
+            PHI_S[0][i] = z / (theta(T) * r_0(rho, Atom_weight)) * (1 - 3 / 2 * X[i] + 1 / 2 * (X[i]) ** 3) - eta_0(T, rho, Atom_weight) * X[i]
 
     s_current = 0
 
@@ -63,7 +63,7 @@ def progonka(T, rho):
         Y = [0] * (N + 1)
         for i in range(N + 1):
             if i == 0:
-                Y[i] = z / (theta(T) * r_0(rho))
+                Y[i] = z / (theta(T) * r_0(rho, Atom_weight))
             else:
                 Y[i] = ALPHA[i - 1] * Y[i - 1] + BETA[i - 1]
 
@@ -93,8 +93,8 @@ def progonka(T, rho):
 
 #progonka(Temperature_system, rho_system)
 
-def eta(T, rho):
-    PHI = progonka(T, rho)
+def eta(T, rho, Atom_weight, z):
+    PHI = progonka(T, rho, Atom_weight, z)
     return - PHI[N]
 
 
