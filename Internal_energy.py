@@ -18,9 +18,9 @@ Z = [(i / N) for i in range(N + 1)]
 
 
 
-def Energy(T, rho):
+def Energy(T, rho, z):
 
-    PHI = progonka(T, rho)
+    PHI = progonka(T, rho, z)
 
     # ВСПОМ. ИНТЕГРАЛ
     def E_sub_int(T, rho):
@@ -98,7 +98,7 @@ def Energy(T, rho):
         
         return const * (2 * integral_3_2(-eta(T, rho)) - 3*E_sub_int(T, rho)) + 0.76874512421364*z**(7/3)
 
-    return E(T , rho)
+    return E(T , rho) * z**(7 / 3)
     #print("E_sub = ", E_sub_int(T, rho))
     #print ("E_k = ", E_k(T, rho))
     #print("E_p = ", E_p(T, rho))
