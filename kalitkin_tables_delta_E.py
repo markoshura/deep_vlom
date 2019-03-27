@@ -72,4 +72,3 @@ for i in range(len(TABLE_DELTA_E)):
 #print('z = ', z)
 #print(log10(10))
 #
-
