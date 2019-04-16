@@ -33,8 +33,8 @@ def r_0(rho, Atom_weight):
 
 
 # Объём атомной ячейки
-def volume(rho):
-    return 4/3 * pi * r_0(rho)**3
+def volume(rho, Atom_weight):
+    return 4/3 * pi * r_0(rho, Atom_weight)**3
 
 
 # Характеристическая температура

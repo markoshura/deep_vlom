@@ -1,0 +1,52 @@
+#Аппроксимация для таблицы значение - холодная кривая
+# rho - x, T - y
+T =
+rho =
+x1 = 0
+x2 = 0
+y1 = 0
+y2 = 0
+x1_place = 0
+x2_place = 0
+y1_place = 0
+y2_place = 0
+j = 0
+i = 1
+flag = True
+while flag:
+    if table[i][j] > rho:
+        i += 1
+    else:
+        need_number = i
+        flag = False
+
+
+def finder(T, rho):
+    i = 1
+    j = 0
+    while table[0][i] > rho:
+        x1 = table[0][i]
+        x2 = table[0][i + 1]
+
+        i += 1
+    while table[j][0] > T:
+        y1 = table[j][0]
+        y2 = table[j + 1][0]
+
+
+
+
+
+def interpolate(x1, x2, y1, y2, T, rho):
+    f1 = (x2 - rho) / (x2 - x1) * table[x1_place][y1_place] + (rho - x1) / (x2 - x1) * table[x2_place][y1_place]
+    f2 = (x2 - rho) / (x2 - x1) * table[x1_place][y2_place] + (rho - x1) / (x2 - x1) * table[x2_place][y2_place]
+
+    return (y2 - T) / (y2 - y1) * f1 + (T - y1) / (y2 - y1) * f2
+
+finder(T, rho)
+interpolate(x1, x2, y1, y2, T, rho)
+
+
+
+
+

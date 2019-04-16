@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 from math import pi
 from scipy import integrate
-from Atom_parameters import E_0, Atom_weight, z 
+from Atom_parameters import E_0
 from Changing_parameters import N , Temperature_system, rho_system
 from Dirak_functions import integral_3_2
 from Cell import volume, theta, r_0
@@ -12,15 +12,16 @@ from working_progonka import X, progonka, eta
 #from sveryaem_phi import excel_phi as PHI, excel_x as X
 #from Pressure import P_e
 #from Changing_parameters import Temperature_system, rho_system
+from Tabular_values import a_0, Na
 
 Z = [(i / N) for i in range(N + 1)]
 
 
 
 
-def Energy(T, rho, z):
+def Energy(T, rho, z, Atom_weight):
 
-    PHI = progonka(T, rho, z)
+    PHI = progonka(T, rho, 1, 1)
 
     # ВСПОМ. ИНТЕГРАЛ
     def E_sub_int(T, rho):
@@ -66,7 +67,7 @@ def Energy(T, rho, z):
         return integr_res_1 + integr_res_2
 
 
-    const = 2**(0.5) / (pi**2) * (theta(T)**2.5) * (4/3) * pi * r_0(rho)**3
+    const = 2**(0.5) / (pi**2) * (theta(T)**2.5) * (4/3) * pi * r_0(rho, 1)**3
 
     # КИНЕТИЧЕСКАЯ ЭНЕРГИЯ
     def E_k(T, rho):
@@ -76,7 +77,7 @@ def Energy(T, rho, z):
     # ПОТЕНЦИАЛЬНАЯ ЭНЕРГИЯ
     def E_p(T, rho):
         #return (2 * 2**0.5 / pi**2) * volume(rho) * theta(T)**2.5 * (integral_3_2(-eta(T, rho)) - 3 * E_sub_int(T, rho))
-        return 2 * const * (integral_3_2(-eta(T, rho)) - 3 * E_sub_int(T, rho))
+        return 2 * const * (integral_3_2(-eta(T, rho, 1, 1)) - 3 * E_sub_int(T, rho))
 
 
 
@@ -96,7 +97,7 @@ def Energy(T, rho, z):
 
         #return E_e(T, rho) - E_0 + 3/2 * theta(T)
         
-        return const * (2 * integral_3_2(-eta(T, rho)) - 3*E_sub_int(T, rho)) + 0.76874512421364*z**(7/3)
+        return const * (2 * integral_3_2(-eta(T, rho, 1, 1)) - 3*E_sub_int(T, rho)) + 0.76874512421364*1**(7/3)
 
     return E(T , rho) * z**(7 / 3)
     #print("E_sub = ", E_sub_int(T, rho))
@@ -105,8 +106,16 @@ def Energy(T, rho, z):
     #print("E_e = ", E_e(T, rho))
     #print("E = ", E(T, rho))
 
-#Energy(0.2, 0.001)
-
+#print(Energy(36.4, 100, 13, 26))
+#z = 13
+#A = 26
+#T = 36.4
+#rho = 100
+#T_h = T / z**(4 / 3)
+#rho_h = rho * Na * 11.19 * 1.4818 * 10**(-25) / A / z
+#print("T_h = ", T / z**(4 / 3))
+#print("rho_h = ", rho * Na * 11.19 * 1.4818 * 10**(-25) / A / z )
+#print("E = ", Energy(T_h, rho_h, 1, 1) * z**(7 / 3))
 #ENERGY_ISOTHERM_RHO = [[], [], [], [], []]
 #RHO = [[], [], [], [], []]
 #k = -3
