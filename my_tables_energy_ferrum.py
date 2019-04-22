@@ -25,11 +25,6 @@ for i in range(1, n + 1):
         TABLE_E[i][j] = Energy(T_h, rho_h, 1, 1) * z**(7 / 3)
         print(i, j)
 
-
-
-
-
-
 f = open('text.txt', 'w')
 for i in range(len(TABLE_E)):
     for j in range(len(TABLE_E[i])):

@@ -3,28 +3,21 @@ from Tabular_values import Na, a_0
 from Changing_parameters import Temperature_system, rho_system
 from working_progonka import progonka
 
-
-# Число итераций
-p = 5
-
 mixture = []
 elem_1 = {'Atom_weight': 55.84, 'Z': 26, 'mass': 55.84}
 elem_2 = {'Atom_weight': 27, 'Z': 13, 'mass': 27 }
 mixture.append(elem_1)
 mixture.append(elem_2)
-amount_of_elements = len(mixture)
-
-small_const_b = (3 / 4 / pi / Na)**(1 / 3) / a_0
-
-big_const_b = 0
-for i in range(len(mixture)):
-    big_const_b += small_const_b**3 * (rho_system**(- 1) * mixture[i]["mass"])
-
-
-
-
-
 def mixture_calculation(Temperature_system, rho_system, mixture):
+    # Число итераций
+    p = 5
+    amount_of_elements = len(mixture)
+
+    small_const_b = (3 / 4 / pi / Na)**(1 / 3) / a_0
+
+    big_const_b = 0
+    for i in range(len(mixture)):
+        big_const_b += small_const_b**3 * (rho_system**(- 1) * mixture[i]["mass"])
 
 # 0-e приближение r_0**3
     def x_0(Atom_weight):
@@ -90,9 +83,14 @@ def mixture_calculation(Temperature_system, rho_system, mixture):
     for i in range(amount_of_elements):
         for j in range(p + 1):
             rho_elems_iterations[i][j] = rho_elems_iterations[i][j]**(1/3)
-    return rho_elems_iterations
 
-print(mixture_calculation(Temperature_system, rho_system, mixture))
+    found_rho = [0 for i in range(amount_of_elements)]
+    for i in range(amount_of_elements):
+        found_rho[i] = rho_elems_iterations[i][p]
+    return found_rho
+    #return rho_elems_iterations
+
+#print(mixture_calculation(Temperature_system, rho_system, mixture))
 #print(len(mixture))
 
 
