@@ -70,14 +70,14 @@ def Energy(T, rho, z, Atom_weight):
     const = 2**(0.5) / (pi**2) * (theta(T)**2.5) * (4/3) * pi * r_0(rho, 1)**3
 
     # КИНЕТИЧЕСКАЯ ЭНЕРГИЯ
-    def E_k(T, rho):
-        #return (3 * 2**0.5 / pi**2) * volume(rho) * theta(T)**2.5 * E_sub_int(T, rho)
-
-        return 3 * const * E_sub_int(T, rho)
-    # ПОТЕНЦИАЛЬНАЯ ЭНЕРГИЯ
-    def E_p(T, rho):
-        #return (2 * 2**0.5 / pi**2) * volume(rho) * theta(T)**2.5 * (integral_3_2(-eta(T, rho)) - 3 * E_sub_int(T, rho))
-        return 2 * const * (integral_3_2(-eta(T, rho, 1, 1)) - 3 * E_sub_int(T, rho))
+   #def E_k(T, rho):
+   #    #return (3 * 2**0.5 / pi**2) * volume(rho) * theta(T)**2.5 * E_sub_int(T, rho)
+   #
+   #    return 3 * const * E_sub_int(T, rho)
+   ## ПОТЕНЦИАЛЬНАЯ ЭНЕРГИЯ
+   #def E_p(T, rho):
+   #    #return (2 * 2**0.5 / pi**2) * volume(rho) * theta(T)**2.5 * (integral_3_2(-eta(T, rho)) - 3 * E_sub_int(T, rho))
+   #    return 2 * const * (integral_3_2(-eta(T, rho, 1, 1)) - 3 * E_sub_int(T, rho))
 
 
 
@@ -88,8 +88,8 @@ def Energy(T, rho, z, Atom_weight):
 
 
     # ВНУТРЕННЯЯ ЭНЕРГИЯ ЭЛЕКТРОНОВ
-    def E_e(T, rho):
-       return E_k(T, rho) + E_p(T, rho)
+   #def E_e(T, rho):
+   #   return E_k(T, rho) + E_p(T, rho)
 
 
     # ПОЛНАЯ ЭНЕРГИЯ
