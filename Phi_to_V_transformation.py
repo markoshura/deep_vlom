@@ -9,7 +9,8 @@ from Dirak_functions import integral_1_2, integral_3_2, integral_minus_1_2
 from Atom_parameters import Atom_weight,z
 from Cell import z_0, r_0, volume, theta, eta
 
-from working_progonka import PHI, X
+from working_progonka import progonka, X
+PHI = progonka(T, rho, 1, 1)
 RESULT_V = [0]*(N+1)
 R = []
 F = [0]*(N+1)
