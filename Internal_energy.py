@@ -87,10 +87,10 @@ def Energy(T, rho, z, Atom_weight):
 
 
 
-    # ВНУТРЕННЯЯ ЭНЕРГИЯ ЭЛЕКТРОНОВ
-   #def E_e(T, rho):
-   #   return E_k(T, rho) + E_p(T, rho)
-
+    ## ВНУТРЕННЯЯ ЭНЕРГИЯ ЭЛЕКТРОНОВ
+    #def E_e(T, rho):
+    #   return E_k(T, rho) + E_p(T, rho)
+    #
 
     # ПОЛНАЯ ЭНЕРГИЯ
     def E(T, rho):
@@ -99,7 +99,7 @@ def Energy(T, rho, z, Atom_weight):
         
         return const * (2 * integral_3_2(-eta(T, rho, 1, 1)) - 3*E_sub_int(T, rho)) + 0.76874512421364*1**(7/3)
 
-    return E(T , rho) * 1**(7 / 3)
+    return E(T , rho) * z**(7 / 3)
     #print("E_sub = ", E_sub_int(T, rho))
     #print ("E_k = ", E_k(T, rho))
     #print("E_p = ", E_p(T, rho))

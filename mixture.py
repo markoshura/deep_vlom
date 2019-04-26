@@ -88,9 +88,10 @@ def mixture_calculation(T, rho, mixture):
             mu_elems_iterations[i][p_current] = mu(x_elems_iterations[i][p_current], mixture[i]["Atom_weight"], mixture[i]["Z"])
             #print("mu_elems_iterations[i][p_current] = ", mu_elems_iterations[i][p_current])
             mu_shtrih_elems_iterations[i][p_current] = mu_shtrih(i, p_current)
-            #print("mu_shtrih_elems_iterations[i][p_current] = ", mu_shtrih_elems_iterations[i][p_current])
+
 
         p_current += 1
+
     rho_elems_iterations = x_elems_iterations
     for i in range(amount_of_elements):
         for j in range(p + 1):
@@ -102,7 +103,7 @@ def mixture_calculation(T, rho, mixture):
     return found_rho
     #return rho_elems_iterations
 
-#print(mixture_calculation(10, 1, mixture))
+print(mixture_calculation(10, 1, mixture))
 #print(len(mixture))
 
 
