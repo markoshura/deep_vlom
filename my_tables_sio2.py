@@ -21,6 +21,7 @@ mixture.append(elem_2_o)
 mixture.append(elem_3_o)
 
 
+
 m = 401
 n = 501
 
