@@ -31,9 +31,10 @@ n = 501
 
 
 
-TABLE_E = [[0 for i in range(m + 1)] for j in range(n + 1)]
+TABLE_E = [[0 for i in range(m + 1)] for j in range(n + 2)]
 TABLE_E[0][1] = - 2.000
 TABLE_E[1][0] = 2.000
+TABLE_E[n + 1][0] = -9.000
 for j in range(2, m + 1):
     TABLE_E[0][j] = TABLE_E[0][1] + (j - 1) * 0.01
 
@@ -42,9 +43,10 @@ for i in range(2, n + 1):
 
 
 
-TABLE_P = [[0 for i in range(m + 1)] for j in range(n + 1)]
+TABLE_P = [[0 for i in range(m + 1)] for j in range(n + 2)]
 TABLE_P[0][1] = - 2.000
 TABLE_P[1][0] = 2.000
+TABLE_P[n + 1][0] = -9.000
 for j in range(2, m + 1):
     TABLE_P[0][j] = TABLE_P[0][1] + (j - 1) * 0.01
 
@@ -55,7 +57,7 @@ for i in range(2, n + 1):
 
 
 
-for i in range(1, n + 1):
+for i in range(1, n + 2):
     for j in range(1, m + 1):
         #print(10 ** TABLE_E[i][0], 10 ** TABLE_E[0][j])
         found_rho = mixture_calculation(10 ** TABLE_E[i][0], 10 ** TABLE_E[0][j], mixture)
