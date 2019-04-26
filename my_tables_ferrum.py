@@ -31,7 +31,7 @@ for j in range(2, m + 1):
 for i in range(2, n + 1):
     TABLE_P[i][0] = TABLE_P[1][0] + (i - 1) * (-0.02)
 
-for i in range(167, n + 2):
+for i in range(1, n + 2):
     for j in range(1, m + 1):
         T_h = 10 ** TABLE_E[i][0] / z**(4 / 3)
         rho_h = 10 ** TABLE_E[0][j] * Na * 11.19 * 1.4818 * 10**(-25) / Atom_weight / z
