@@ -20,10 +20,10 @@ for i in range(1, n + 1):
     for j in range(1, m + 1):
         T_h = 10 ** TABLE_E[i][0] / z**(4 / 3)
         rho_h = 10 ** TABLE_E[0][j] * Na * 11.19 * 1.4818 * 10**(-25) / Atom_weight / z
-        TABLE_E[i][j] = P(T_h, rho_h) #* z**(7 / 3)
+        TABLE_E[i][j] = P(T_h, rho_h) * z**(10 / 3)
         print(i, j)
 
-f = open('text.txt', 'w')
+f = open('text2.txt', 'w')
 for i in range(len(TABLE_E)):
     for j in range(len(TABLE_E[i])):
         f.write(str(TABLE_E[i][j]))

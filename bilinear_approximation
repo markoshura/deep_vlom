@@ -1,25 +1,26 @@
 #Аппроксимация для таблицы значение - холодная кривая
-# rho - x, T - y
+# rho - T, rho - y
 
 
 
 # Import `load_workbook` module from `openpyxl`
 from openpyxl import load_workbook
+from math import log10
 
 # Load in the workbook
 wb = load_workbook('C:/Users/xaha9/Desktop/aluminium.xlsx')
 
 # Get sheet names
-print(wb.get_sheet_names())
+#print(wb.get_sheet_names())
 
 # Load a specific sheet by name
 
-sheet = wb.get_sheet_by_name('тестовый лист')
+sheet = wb.get_sheet_by_name('energy_ferrum_исходник')
 ## Retrieve the value of a certain cell
-print(sheet['A2'].value)
+#print(sheet['A2'].value)
 #
 ## Select element 'B2' of your sheet
-c = sheet['B2']
+#c = sheet['B2']
 #
 ## Retrieve the row number of your element
 #print(c.row)
@@ -29,73 +30,42 @@ c = sheet['B2']
 #
 ## Retrieve the coordinates of the cell
 #print(c.coordinate)
-#
-x1 = 0
-flag = True
-for cellObj in sheet['B2':'OL2']:
-      for cell in cellObj:
-          if cell.value > 5:
-              #print(cell.coordinate, cell.value)
-              x1 = cell
-          else:
-              break
 
 
-print(x1)
-#
-#
-#T =
-#rho =
-#x1 = 0
-#x2 = 0
-#y1 = 0
-#y2 = 0
-#x1_place = 0
-#x2_place = 0
-#y1_place = 0
-#y2_place = 0
-#j = 0
-#i = 1
-#
-#flag = True
-#while flag:
-#    if table[i][j] > rho:
-#        i += 1
-#    else:
-#        need_number = i
-#        flag = False
-#>>> colC = ws['C']
-#>>> col_range = ws['C:D']
-#>>> row10 = ws[10]
-#>>> row_range = ws[5:10]
-#
-#def finder(T, rho, x1, x2, y1, y2):
-#    i = 1
-#    j = 0
-#    while table[0][i] > rho:
-#        x1 = table[0][i]
-#        x2 = table[0][i + 1]
-#
-#        i += 1
-#    while table[j][0] > T:
-#        y1 = table[j][0]
-#        y2 = table[j + 1][0]
-#        j += 1
-#    return x1, x2, y1, y2
-#
-#while cell in ['A': 'OL']
-#
-#
-#
-#def interpolate(x1, x2, y1, y2, T, rho):
-#    f1 = (x2 - rho) / (x2 - x1) * table[x1_place][y1_place] + (rho - x1) / (x2 - x1) * table[x2_place][y1_place]
-#    f2 = (x2 - rho) / (x2 - x1) * table[x1_place][y2_place] + (rho - x1) / (x2 - x1) * table[x2_place][y2_place]
-#
-#    return (y2 - T) / (y2 - y1) * f1 + (T - y1) / (y2 - y1) * f2
-#
-#finder(T, rho, x1, x2, y1, y2)
-#interpolate(x1, x2, y1, y2, T, rho)
-#
+def bilinear_interpolation(T, rho):
+    x1 = 0
+    x2 = 0
+    y1 = 0
+    y2 = 0
+
+    for cellObj in sheet['B1':'OL1']:
+        for cell in cellObj:
+            if cell.value < log10(T):
+                x1 = cell
+            else:
+
+                break
+    x2 = sheet.cell(row=x1.row, column=x1.column + 1)
+    for cellObj in sheet['A2':'A502']:
+        for cell in cellObj:
+            if cell.value > log10(rho):
+                y1 = cell
+            else:
+                break
+
+    y2 = sheet.cell(row=y1.row + 1, column=y1.column)
+
+
+    def interpolate(x1, x2, y1, y2, T, rho):
+
+        f1 = (10 **(x2.value) - T) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y1.row, column=x1.column).value + (T - 10 **(x1.value)) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y1.row, column=x2.column).value
+        f2 = (10 **(x2.value) - T) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y2.row, column=x1.column).value + (T - 10 **(x1.value)) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y2.row, column=x2.column).value
+
+        return (10 **(y2.value) - rho) / (10 **(y2.value) - 10 **(y1.value)) * f1 + (rho - 10 **(y1.value)) / (10 **(y2.value) - 10 **(y1.value)) * f2
+
+    return interpolate(x1, x2, y1, y2, T, rho)
+
+print(bilinear_interpolation(9, 9))
 
 
 

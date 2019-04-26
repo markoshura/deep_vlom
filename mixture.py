@@ -1,14 +1,20 @@
 from math import pi
 from Tabular_values import Na, a_0
-from Changing_parameters import Temperature_system, rho_system
+#from Changing_parameters import T, rho
 from working_progonka import progonka
 
+
 mixture = []
-elem_1 = {'Atom_weight': 55.84, 'Z': 26, 'mass': 55.84}
-elem_2 = {'Atom_weight': 27, 'Z': 13, 'mass': 27 }
-mixture.append(elem_1)
-mixture.append(elem_2)
-def mixture_calculation(Temperature_system, rho_system, mixture):
+elem_1_si = {'Atom_weight': 28, 'Z': 14, 'mass': 28, 'amount': 1}
+elem_2_o = {'Atom_weight': 16, 'Z': 8, 'mass': 16, 'amount': 2}
+elem_3_o = {'Atom_weight': 16, 'Z': 8, 'mass': 16, 'amount': 2}
+
+
+
+mixture.append(elem_1_si)
+mixture.append(elem_2_o)
+mixture.append(elem_3_o)
+def mixture_calculation(T, rho, mixture):
     # Число итераций
     p = 5
     amount_of_elements = len(mixture)
@@ -17,21 +23,21 @@ def mixture_calculation(Temperature_system, rho_system, mixture):
 
     big_const_b = 0
     for i in range(len(mixture)):
-        big_const_b += small_const_b**3 * (rho_system**(- 1) * mixture[i]["mass"])
+        big_const_b += small_const_b**3 * (rho**(- 1) * mixture[i]["mass"])
 
 # 0-e приближение r_0**3
     def x_0(Atom_weight):
-        return Atom_weight * rho_system**(- 1)* small_const_b**3
+        return Atom_weight * rho**(- 1)* small_const_b**3
     def mu_0(Atom_weight, z):
-        PHI = progonka(Temperature_system, rho_system, Atom_weight, z)
+        PHI = progonka(T, rho, Atom_weight, z)
         return PHI[len(PHI) - 1]
 
     def mu_shtrih_0(Atom_weight, z):
         x0 = x_0(Atom_weight)
         x1 = x_0(Atom_weight + Atom_weight * 0.1)
-        PHI_0 = progonka(Temperature_system, 3 * Atom_weight / x0 / 4 / pi / Na / a_0**3, Atom_weight, z)
+        PHI_0 = progonka(T, 3 * Atom_weight / x0 / 4 / pi / Na / a_0**3, Atom_weight, z)
         mu0 = PHI_0[len(PHI_0) - 1]
-        PHI_1 = progonka(Temperature_system, 3 * Atom_weight / x1 / 4 / pi / Na / a_0**3, Atom_weight,  z)
+        PHI_1 = progonka(T, 3 * Atom_weight / x1 / 4 / pi / Na / a_0**3, Atom_weight,  z)
         mu1 = PHI_1[len(PHI_1) - 1]
         return (mu1 - mu0) / (x1 - x0)
 
@@ -40,7 +46,7 @@ def mixture_calculation(Temperature_system, rho_system, mixture):
                     x_elems_iterations[i][p] - x_elems_iterations[i][p - 1])
 
     def mu(x, Atom_weight, z):
-        PHI = progonka(Temperature_system, 3 * Atom_weight / x / 4 / pi / Na / a_0**3, Atom_weight, z)
+        PHI = progonka(T, 3 * Atom_weight / x / 4 / pi / Na / a_0**3, Atom_weight, z)
         return PHI[len(PHI) - 1]
     def Y(p):
         promezh_summ_1 = 0
@@ -66,8 +72,11 @@ def mixture_calculation(Temperature_system, rho_system, mixture):
 
     for i in range(len(mixture)):
         mu_elems_iterations[i][0] = mu_0(mixture[i]["Atom_weight"], mixture[i]["Z"])
+        #print("mu_elems_iterations[i][0] = ", mu_elems_iterations[i][0])
         x_elems_iterations[i][0] = x_0(mixture[i]['Atom_weight'])
+        #print("x_elems_iterations[i][0] = ", x_elems_iterations[i][0])
         mu_shtrih_elems_iterations[i][0] = mu_shtrih_0(mixture[i]['Atom_weight'], mixture[i]['Z'])
+        #print("mu_shtrih_elems_iterations[i][0] = ", mu_shtrih_elems_iterations[i][0])
 
     p_current = 1
 
@@ -75,8 +84,11 @@ def mixture_calculation(Temperature_system, rho_system, mixture):
 
         for i in range(len(mixture)):
             x_elems_iterations[i][p_current] = (Y(p_current - 1) - mu_elems_iterations[i][p_current - 1]) / mu_shtrih_elems_iterations[i][p_current - 1] + x_elems_iterations[i][p_current - 1]
+            #print("x_elems_iterations[i][p_current] = ", x_elems_iterations[i][p_current])
             mu_elems_iterations[i][p_current] = mu(x_elems_iterations[i][p_current], mixture[i]["Atom_weight"], mixture[i]["Z"])
+            #print("mu_elems_iterations[i][p_current] = ", mu_elems_iterations[i][p_current])
             mu_shtrih_elems_iterations[i][p_current] = mu_shtrih(i, p_current)
+            #print("mu_shtrih_elems_iterations[i][p_current] = ", mu_shtrih_elems_iterations[i][p_current])
 
         p_current += 1
     rho_elems_iterations = x_elems_iterations
@@ -90,7 +102,7 @@ def mixture_calculation(Temperature_system, rho_system, mixture):
     return found_rho
     #return rho_elems_iterations
 
-#print(mixture_calculation(Temperature_system, rho_system, mixture))
+#print(mixture_calculation(10, 1, mixture))
 #print(len(mixture))
 
 
