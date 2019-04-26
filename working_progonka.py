@@ -36,7 +36,7 @@ def progonka(T, rho, Atom_weight, z):
         if i == 0:
             PHI_S[0][0] = z / (theta(T) * r_0(rho, Atom_weight))
         else:
-            PHI_S[0][i] = z / (theta(T) * r_0(rho, Atom_weight)) * (1 - 3 / 2 * X[i] + 1 / 2 * (X[i]) ** 3) - eta_0(T, rho, Atom_weight) * X[i]
+            PHI_S[0][i] = z / (theta(T) * r_0(rho, Atom_weight)) * (1 - 3 / 2 * X[i] + 1 / 2 * (X[i]) ** 3) - eta_0(T, rho) * X[i]
 
     s_current = 0
 

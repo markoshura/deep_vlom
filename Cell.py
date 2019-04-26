@@ -2,23 +2,36 @@
 
 import numpy as np
 
-from math import pi, log
+from math import pi, log, exp
 from Dirak_functions import integral_1_2
 from Tabular_values import a_0, Na, E_h
-from Atom_parameters import Atom_weight, z
+
 
 
 
 # Безразмерный потенциал
-def eta_0(T, rho, Atom_weight):
-    q = 2.795 * 10**(-3) * z * rho / (Atom_weight * T**1.5)
-    try:
-        res = 0.5 * log(pi / 6) - 1.5 * log((np.exp((2/3 * q**2)**(1/3), dtype=np.float64)-1))
-    except OverflowError:
-        print('Overflow epta!')
-        res = float('inf')
-    return res
-    #return 0.361127101
+def eta_0(T, rho):
+
+    q = 3 * pi / 2 * 1 / 2 / theta(T)**(3 / 2) / r_0(rho, 1)**3
+    #try:
+    #    if q > 10**3:
+    #        res = - (3 / 2 * q) **(2 / 3)
+    #    if q < 10 ** (- 3):
+    #        res = log(pi ** (1 / 2) / 2 / q)
+    #    else:
+    #        res = 0.5 * log(pi / 6) - 1.5 * log((np.exp((2/3 * q**2)**(1/3), dtype=np.float64)-1))
+    #except OverflowError:
+    #    print('Overflow epta!')
+    #    res = float('inf')
+    #return res
+    if q > 10**2:
+        return - (3 / 2 * q) **(2 / 3)
+    if q < 10 ** (- 3):
+        return log(pi ** (1 / 2) / 2 / q)
+    else:
+        return 0.5 * log(pi / 6) - 1.5 * log((exp((2/3 * q**2)**(1/3))))
+
+
 
 
 
