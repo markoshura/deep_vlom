@@ -21,8 +21,8 @@ def P_e_approximation(T, rho):
 
 
 # Полное давление (ГПа)
-def P(T, rho):
-    PHI = progonka (T, rho, 1, 1)
+def P(T, rho, PHI):
+    #PHI = progonka (T, rho, 1, 1)
     #return (P_e(T, rho) + theta(T) / volume(rho))
     return 32 / (3 * pi**3) * (2 / pi)**(2 / 3) * (2**(7/6) * 3**(2/3) * pi**(-5 / 3) * theta(T)**(1/2) * volume(rho, 1) **(2/3) * (PHI[0])**2)**(-5 / 3) * integral_3_2(PHI[N])
 

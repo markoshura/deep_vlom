@@ -19,9 +19,9 @@ Z = [(i / N) for i in range(N + 1)]
 
 
 
-def Energy(T, rho, z, Atom_weight):
+def Energy(T, rho, z, Atom_weight, PHI):
 
-    PHI = progonka(T, rho, 1, 1)
+    #PHI = progonka(T, rho, 1, 1)
 
     # ВСПОМ. ИНТЕГРАЛ
     def E_sub_int(T, rho):
