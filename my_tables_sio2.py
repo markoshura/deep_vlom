@@ -8,7 +8,7 @@ from working_progonka import progonka
 mixture = []
 elem_1_si = {'Atom_weight': 28, 'Z': 14, 'mass': 28, 'amount': 1}
 elem_2_o = {'Atom_weight': 16, 'Z': 8, 'mass': 16, 'amount': 2}
-elem_3_o = {'Atom_weight': 16, 'Z': 8, 'mass': 16, 'amount': 2}
+
 
 nuclear_amount = 3
 
@@ -18,7 +18,7 @@ Weight = 60
 
 mixture.append(elem_1_si)
 mixture.append(elem_2_o)
-mixture.append(elem_3_o)
+
 
 
 
