@@ -27,7 +27,7 @@ def Energy(T, rho, z, Atom_weight, PHI):
     def E_sub_int(T, rho):
 
         max_i = 2
-        while PHI[max_i] / X[max_i] >= 10**6:
+        while (PHI[max_i] / X[max_i] >= 10**6) and (max_i < N):
             max_i += 1
 
         if max_i % 2 != 0:
@@ -99,7 +99,7 @@ def Energy(T, rho, z, Atom_weight, PHI):
         
         return const * (2 * integral_3_2(-eta(T, rho, 1, 1)) - 3*E_sub_int(T, rho)) + 0.76874512421364*1**(7/3)
 
-    return E(T , rho) * z**(7 / 3)
+    return E(T , rho)
     #print("E_sub = ", E_sub_int(T, rho))
     #print ("E_k = ", E_k(T, rho))
     #print("E_p = ", E_p(T, rho))
