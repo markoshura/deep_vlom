@@ -1,18 +1,14 @@
 # ИЗОТЕРМЫ И ИЗОХОРЫ ВНУТРЕННЕЙ ЭНЕРГИИ
 
-import matplotlib.pyplot as plt
+
 
 from math import pi
 from scipy import integrate
-from Atom_parameters import E_0
-from Changing_parameters import N , Temperature_system, rho_system
+from Changing_parameters import N
 from Dirak_functions import integral_3_2
 from Cell import volume, theta, r_0
-from working_progonka import X, progonka, eta
-#from sveryaem_phi import excel_phi as PHI, excel_x as X
-#from Pressure import P_e
-#from Changing_parameters import Temperature_system, rho_system
-from Tabular_values import a_0, Na
+from working_progonka import X, eta
+
 
 Z = [(i / N) for i in range(N + 1)]
 
@@ -40,22 +36,7 @@ def Energy(T, rho, z, Atom_weight, PHI):
 
         integr_func_1 = [4/5 * PHI[i]**2.5 for i in range(max_i + 1)]
         integr_func_2 = [2 * Z[i]**5 * integral_3_2(PHI[i] / Z[i]**2) for i in range(max_i, N + 1)]
-        #integr_func_2 = [X[i] ** 2 * integral_3_2(PHI[i] / X[i]) for i in range(max_i, N + 1)]
 
-
-        #i = 0
-        #integr_res_1 = 0
-        #while i <= (max_i - 2):
-        #
-        #    integr_res_1 += 1/6 * (integr_func_1[i] + 4 * integr_func_1[i+1] + integr_func_1[i+2]) * (integr_int_1[i+2] - integr_int_1[i])
-        #    i += 2
-        #
-        #integr_res_2 = 0
-        #i = max_i
-        #while i <= N - 2:
-        #
-        #    integr_res_2 += 1/6 * (integr_func_2[i - max_i] + 4 * integr_func_2[i+1 - max_i] + integr_func_2[i+2-max_i]) * (integr_int_2[i+2-max_i] - integr_int_2[i-max_i])
-        #    i += 2
 
 
 
@@ -100,11 +81,7 @@ def Energy(T, rho, z, Atom_weight, PHI):
         return const * (2 * integral_3_2(-eta(T, rho, 1, 1)) - 3*E_sub_int(T, rho)) + 0.76874512421364*1**(7/3)
 
     return E(T , rho)
-    #print("E_sub = ", E_sub_int(T, rho))
-    #print ("E_k = ", E_k(T, rho))
-    #print("E_p = ", E_p(T, rho))
-    #print("E_e = ", E_e(T, rho))
-    #print("E = ", E(T, rho))
+
 
 #print(Energy(36.4, 100, 13, 26))
 #z = 13
