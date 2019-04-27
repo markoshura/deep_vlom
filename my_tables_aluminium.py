@@ -41,14 +41,14 @@ for i in range(1, n + 2):
         TABLE_P[i][j] = P(T_h, rho_h, PHI) * z ** (10 / 3)
         print(i, j)
 
-f = open('energy_ferrum.txt', 'w')
+f = open('energy_aluminium.txt', 'w')
 for i in range(len(TABLE_E)):
     for j in range(len(TABLE_E[i])):
         f.write(str(TABLE_E[i][j]))
         f.write(" ")
     f.write("\n")
 
-f = open('pressure_ferrum.txt', 'w')
+f = open('pressure_aluminium.txt', 'w')
 for i in range(len(TABLE_P)):
     for j in range(len(TABLE_P[i])):
         f.write(str(TABLE_P[i][j]))
