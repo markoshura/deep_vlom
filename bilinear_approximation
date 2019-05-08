@@ -1,5 +1,5 @@
 #Аппроксимация для таблицы значение - холодная кривая
-# rho - T, rho - y
+# rho - x, T - y
 
 
 
@@ -8,7 +8,7 @@ from openpyxl import load_workbook
 from math import log10
 
 # Load in the workbook
-wb = load_workbook('C:/Users/xaha9/Desktop/aluminium.xlsx')
+wb = load_workbook('C:/Users/xaha9/Desktop/ШР/deep_lom/aluminium.xlsx')
 
 # Get sheet names
 #print(wb.get_sheet_names())
@@ -40,32 +40,37 @@ def bilinear_interpolation(T, rho):
 
     for cellObj in sheet['B1':'OL1']:
         for cell in cellObj:
-            if cell.value < log10(T):
+            if cell.value <= log10(rho):
                 x1 = cell
             else:
 
                 break
+
+
     x2 = sheet.cell(row=x1.row, column=x1.column + 1)
+
+    print("x1 = ", x1, "X2 = ", x2)
     for cellObj in sheet['A2':'A502']:
         for cell in cellObj:
-            if cell.value > log10(rho):
+            if cell.value >= log10(T):
                 y1 = cell
             else:
                 break
 
     y2 = sheet.cell(row=y1.row + 1, column=y1.column)
+    print("y1 = ", y1, "y2 = ", y2)
 
 
     def interpolate(x1, x2, y1, y2, T, rho):
 
-        f1 = (10 **(x2.value) - T) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y1.row, column=x1.column).value + (T - 10 **(x1.value)) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y1.row, column=x2.column).value
-        f2 = (10 **(x2.value) - T) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y2.row, column=x1.column).value + (T - 10 **(x1.value)) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y2.row, column=x2.column).value
+        f1 = (10 **(x2.value) - rho) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y1.row, column=x1.column).value + (rho - 10 **(x1.value)) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y1.row, column=x2.column).value
+        f2 = (10 **(x2.value) - rho) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y2.row, column=x1.column).value + (rho - 10 **(x1.value)) / (10 **(x2.value) - 10 **(x1.value)) * sheet.cell(row=y2.row, column=x2.column).value
 
-        return (10 **(y2.value) - rho) / (10 **(y2.value) - 10 **(y1.value)) * f1 + (rho - 10 **(y1.value)) / (10 **(y2.value) - 10 **(y1.value)) * f2
+        return (10 **(y2.value) - T) / (10 **(y2.value) - 10 **(y1.value)) * f1 + (rho - 10 **(y1.value)) / (10 **(y2.value) - 10 **(y1.value)) * f2
 
     return interpolate(x1, x2, y1, y2, T, rho)
 
-print(bilinear_interpolation(0.01, 100))
+print(bilinear_interpolation(100, 0.01))
 
 
 

@@ -40,27 +40,27 @@ def hi(T, rho):
 
             h[i] =(2 * i + 1) / N**2
 
-            k1[i] = h[i]*const*(1/2*integral_minus_1_2(PHI[i]/X[i])*Y[i]+X[i]*igrek_sht(PHI[i]/X[i]))
+            k1[i] = h[i] * const * (1 / 2 * integral_minus_1_2(PHI[i] / X[i]) * Y[i] + X[i] * igrek_sht(PHI[i] / X[i]))
 
-            q1[i] = h[i]*Z[i]
+            q1[i] = h[i] * Z[i]
 
-            k2[i] = h[i]*const*(1/2*integral_minus_1_2(((PHI[i]+PHI[i-1])/2)/((X[i]+X[i-1])/2))*(Y[i]+q1[i]/2)+((X[i]+X[i-1])/2)*igrek_sht((PHI[i]+PHI[i-1])/2)/((X[i]+X[i-1])/2))
+            k2[i] = h[i] * const * (1 / 2 * integral_minus_1_2(((PHI[i] + PHI[i-1]) / 2)/((X[i] + X[i-1]) / 2))*(Y[i] + q1[i] / 2)+((X[i] + X[i-1]) / 2)*igrek_sht((PHI[i] + PHI[i-1]) / 2)/((X[i] + X[i-1])/2))
 
-            q2[i] = h[i]*(Z[i]+k1[i]/2)
+            q2[i] = h[i]*(Z[i] + k1[i] / 2)
 
-            k3[i] = h[i]*const*(1/2*integral_minus_1_2(((PHI[i]+PHI[i-1])/2)/((X[i]+X[i-1])/2))*(Y[i]+q2[i]/2)+((X[i]+X[i-1])/2)*igrek_sht((PHI[i]+PHI[i-1])/2)/((X[i]+X[i-1])/2))
+            k3[i] = h[i] * const * (1 / 2 * integral_minus_1_2(((PHI[i] + PHI[i-1]) / 2)/((X[i] + X[i-1]) / 2))*(Y[i] + q2[i] / 2)+((X[i] + X[i-1]) / 2) * igrek_sht((PHI[i] + PHI[i-1]) / 2) / ((X[i] + X[i-1]) / 2))
 
-            q3[i] = h[i]*(Z[i]+k2[i]/2)
+            q3[i] = h[i] * (Z[i] + k2[i] / 2)
 
-            k4[i] = h[i]*const*(1/2*integral_minus_1_2(PHI[i-1]/X[i-1])*(Y[i]+q3[i])+X[i-1]*igrek_sht(PHI[i-1]/X[i-1]))
+            k4[i] = h[i] * const * (1 / 2 *integral_minus_1_2(PHI[i-1] / X[i-1])*(Y[i] + q3[i]) + X[i-1] * igrek_sht(PHI[i-1] / X[i-1]))
 
-            q4[i] = h[i]*(Z[i]+k3[i])
+            q4[i] = h[i] * (Z[i] + k3[i])
 
-            Y[i-1] = Y[i] + (-q1[i]-2*q2[i]-2*q3[i]-q4[i])/6
+            Y[i-1] = Y[i] + (-q1[i] - 2 * q2[i] - 2 * q3[i] - q4[i]) / 6
 
-            Z[i-1] = Z[i] + (-k1[i]-2*k2[i]-2*k3[i]-k4[i])/6
+            Z[i-1] = Z[i] + (-k1[i] - 2 * k2[i] - 2 * k3[i] - k4[i]) / 6
 
-        Z[0] = Z[1]+1/3*(Z[1]-Z[2])
+        Z[0] = Z[1] + 1 / 3 * (Z[1] - Z[2])
         i = 1
         h[i] = (2 * i + 1) / N ** 2
 
@@ -80,8 +80,6 @@ def hi(T, rho):
 
         q3[i] = h[i] * (Z[i] + k2[i] / 2)
 
-
-
         q4[i] = h[i] * (Z[i] + k3[i])
 
         Y[i - 1] = Y[i] + (-q1[i] - 2 * q2[i] - 2 * q3[i] - q4[i]) / 6
@@ -91,6 +89,7 @@ def hi(T, rho):
     def sigma_2(sigma_0, sigma_1):
         HI1 = hi_function(sigma_1)
         HI0 = hi_function(sigma_0)
+        print(sigma_1 - (sigma_1 - sigma_0) * HI1[0] / (HI1[0] - HI0[0]))
         return sigma_1 - (sigma_1 - sigma_0) * HI1[0] / (HI1[0] - HI0[0])
 
 
