@@ -27,7 +27,7 @@ TABLE_P[1][0] = 2.000
 TABLE_P[n + 1][0] = -9.000
 
 for j in range(2, m + 1):
-    TABLE_E[0][j] = TABLE_P[0][1] + (j - 1) * 0.01
+    TABLE_P[0][j] = TABLE_P[0][1] + (j - 1) * 0.01
 
 for i in range(2, n + 1):
     TABLE_P[i][0] = TABLE_P[1][0] + (i - 1) * (-0.02)

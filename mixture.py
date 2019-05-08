@@ -103,7 +103,7 @@ def mixture_calculation(T, rho, mixture):
     return found_rho
     #return rho_elems_iterations
 
-print(mixture_calculation(10, 1, mixture))
+#print(mixture_calculation(10, 1, mixture))
 #print(len(mixture))
 
 
