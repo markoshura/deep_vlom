@@ -1,5 +1,16 @@
 #ДАВЛЕНИЕ
-def delta_P(T,rho):
-    HI = hi_function(T, rho)
-    PHI = progonka(T, rho)
-    return theta(T)**2/(3*math.pi**3)*(HI[N]*integral_1_2(PHI[N]) + igrek(PHI[N]))
+
+from working_progonka import progonka
+from math import pi
+from hi_function import hi
+from Cell import theta
+from Dirak_functions import integral_1_2, igrek
+from Changing_parameters import N
+from Cell import volume
+def delta_P(T, rho):
+    HI = hi(T, rho)
+    PHI = progonka(T, rho, 1, 1)
+    return 8 / (3 * pi**4) * (2 / pi)**(1 / 3) * (2**(7/6) * 3**(2/3) * pi**(-5 / 3) * theta(T)**(1/2) * volume(rho, 1) **(2/3) * PHI[0]**2)**(4 / 3) * (HI[N] * integral_1_2(PHI[N]) + igrek(PHI[N]))
+
+
+#print(delta_P(10 ** 3 / 36.7493224786, 1.0 / (8.923608963522 * 0.01 * 10 ** (- 4))))

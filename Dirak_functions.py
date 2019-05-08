@@ -228,11 +228,10 @@ def igrek_sht(x):
 
 def D2_I12(x):
 
-    dx = max(0.14, 0.001*abs(x))
-    return (-integral_sht_1_2(x+dx)+integral_sht_1_2(x-dx)+168*integral_sht_1_2(x+dx/2.0)-168*integral_sht_1_2(x-dx/2.0)-5376*integral_sht_1_2(x+dx/4.0)+5376*integral_sht_1_2(x-dx/4.0)+32768*integral_sht_1_2(x+dx/8.0)-32768*integral_sht_1_2(x-dx/8.0))/(5670*dx)
-
-
-
+    dx = max(0.14, 0.001 * abs(x))
+    return (integral_sht_1_2(x + dx) + integral_sht_1_2(x - dx) + 168 * integral_sht_1_2(x + dx / 2.0) - 168 * integral_sht_1_2(
+        x - dx / 2.0) - 5376 * integral_sht_1_2(x + dx / 4.0) + 5376 * integral_sht_1_2(x - dx / 4.0) + 32768 * integral_sht_1_2(
+        x + dx / 8.0) - 32768 * integral_sht_1_2(x - dx / 8.0)) / (5670 * dx)
 # Сумма полиномов Чебышева
 def t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7):
     xT = (x - bFac) / kFac
@@ -261,7 +260,7 @@ def J_Exchange(x):
         cf8 = 1.603501910160424576402142699306101E+8
         bFac = 0.383705176155388
         x2 = x * x
-        return  bFac + cf1 * log(x) + cf2 * x2 + cf3 / x2 + cf4 * x**(-4) + cf5 * x**(-6) + cf6 * x**(-8)
+        return bFac + cf1 * log(x) + cf2 * x2 + cf3 / x2 + cf4 * x**(-4) + cf5 * x**(-6) + cf6 * x**(-8)
     elif x >= 7.:
         kFac = 4.07836463283327
         bFac = 11
