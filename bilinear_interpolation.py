@@ -70,7 +70,7 @@ def bilinear_interpolation(T, rho):
 
     return interpolate(x1, x2, y1, y2, T, rho)
 
-print(bilinear_interpolation(100, 0.01))
+#print(bilinear_interpolation(100, 0.01))
 
 
 
