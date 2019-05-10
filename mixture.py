@@ -7,13 +7,17 @@ from working_progonka import progonka
 mixture = []
 elem_1_si = {'Atom_weight': 28, 'Z': 14, 'mass': 28, 'amount': 1}
 elem_2_o = {'Atom_weight': 16, 'Z': 8, 'mass': 16, 'amount': 2}
-elem_3_o = {'Atom_weight': 16, 'Z': 8, 'mass': 16, 'amount': 2}
+
+
+nuclear_amount = 3
+
+Weight = 60
 
 
 
 mixture.append(elem_1_si)
 mixture.append(elem_2_o)
-mixture.append(elem_3_o)
+
 def mixture_calculation(T, rho, mixture):
     # Число итераций
     p = 5
@@ -42,8 +46,10 @@ def mixture_calculation(T, rho, mixture):
         return (mu1 - mu0) / (x1 - x0)
 
     def mu_shtrih(i, p):
-        return (mu_elems_iterations[i][p] - mu_elems_iterations[i][p - 1]) / (
-                    x_elems_iterations[i][p] - x_elems_iterations[i][p - 1])
+        if x_elems_iterations[i][p] != x_elems_iterations[i][p - 1]:
+            return (mu_elems_iterations[i][p] - mu_elems_iterations[i][p - 1]) / (x_elems_iterations[i][p] - x_elems_iterations[i][p - 1])
+        else:
+            return mu_shtrih(i, p - 1)
 
     def mu(x, Atom_weight, z):
         PHI = progonka(T, 3 * Atom_weight / x / 4 / pi / Na / a_0**3, Atom_weight, z)
@@ -84,10 +90,11 @@ def mixture_calculation(T, rho, mixture):
 
         for i in range(len(mixture)):
             x_elems_iterations[i][p_current] = (Y(p_current - 1) - mu_elems_iterations[i][p_current - 1]) / mu_shtrih_elems_iterations[i][p_current - 1] + x_elems_iterations[i][p_current - 1]
-            #print("x_elems_iterations[i][p_current] = ", x_elems_iterations[i][p_current])
+            #print("p_current = ", p_current, "x_elems_iterations[i][p_current] = ", x_elems_iterations[i][p_current])
             mu_elems_iterations[i][p_current] = mu(x_elems_iterations[i][p_current], mixture[i]["Atom_weight"], mixture[i]["Z"])
-            #print("mu_elems_iterations[i][p_current] = ", mu_elems_iterations[i][p_current])
+            #print("p_current = ", p_current, "mu_elems_iterations[i][p_current] = ", mu_elems_iterations[i][p_current])
             mu_shtrih_elems_iterations[i][p_current] = mu_shtrih(i, p_current)
+            #print("p_current = ", p_current, "mu_shtrih_elems_iterations[i][p_current] = ", mu_shtrih_elems_iterations[i][p_current])
 
 
         p_current += 1
@@ -103,8 +110,6 @@ def mixture_calculation(T, rho, mixture):
     return found_rho
     #return rho_elems_iterations
 
-#print(mixture_calculation(10, 1, mixture))
-#print(len(mixture))
 
 
 
