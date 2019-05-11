@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from Changing_parameters import N
 from Dirak_functions import integral_minus_1_2, igrek_sht, integral_sht_1_2
 
-from Atom_parameters import Atom_weight,z
+
 from Cell import z_0, r_0, volume, theta
 
 from working_progonka import progonka, X
@@ -40,8 +40,8 @@ def hi(T, rho):
 
 
             h[i] = (-2 * i + 1) / N**2
-            print("h = ", h[i])
-            print("i = ", i, "N = ", N, "sigma = ", sigma)
+            #print("h = ", h[i])
+            #print("i = ", i, "N = ", N, "sigma = ", sigma)
 
 
             k1[i] = h[i] * const * (integral_sht_1_2(PHI[i] / X[i]) * Y[i] + X[i] * igrek_sht(PHI[i] / X[i]))
@@ -88,7 +88,8 @@ def hi(T, rho):
 
         Y[i - 1] = Y[i] + (q1[i] + 2 * q2[i] + 2 * q3[i] + q4[i]) / 6
 
-
+        #plt.plot(Y)
+        #plt.show()
         return Y
 
     def sigma_2(sigma_0, sigma_1):
@@ -101,6 +102,6 @@ def hi(T, rho):
     sigma_22 = sigma_2(100, -100)
 
     return(hi_function(sigma_22))
-print(hi(0.001, 1))
+#print(hi(0.001, 1))
 
 

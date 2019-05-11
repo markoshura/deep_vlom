@@ -229,9 +229,10 @@ def igrek_sht(x):
 def D2_I12(x):
 
     dx = max(0.14, 0.001 * abs(x))
-    return (integral_sht_1_2(x + dx) + integral_sht_1_2(x - dx) + 168 * integral_sht_1_2(x + dx / 2.0) - 168 * integral_sht_1_2(
+    return ( -integral_sht_1_2(x + dx) + integral_sht_1_2(x - dx) + 168 * integral_sht_1_2(x + dx / 2.0) - 168 * integral_sht_1_2(
         x - dx / 2.0) - 5376 * integral_sht_1_2(x + dx / 4.0) + 5376 * integral_sht_1_2(x - dx / 4.0) + 32768 * integral_sht_1_2(
         x + dx / 8.0) - 32768 * integral_sht_1_2(x - dx / 8.0)) / (5670 * dx)
+
 # Сумма полиномов Чебышева
 def t7_cheb(x, kFac, bFac, cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7):
     xT = (x - bFac) / kFac
@@ -338,4 +339,4 @@ def J_Exchange(x):
 
 
 def igrek(x):
-    return 6 * J_Exchange(x) + integral_1_2(x) * 1/2 * integral_minus_1_2(x)
+    return 6 * J_Exchange(x) + integral_1_2(x) * integral_sht_1_2(x)

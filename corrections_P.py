@@ -10,7 +10,7 @@ from Cell import volume
 def delta_P(T, rho):
     HI = hi(T, rho)
     PHI = progonka(T, rho, 1, 1)
+    print("Hi_n = ", HI[N], "len = ", len(HI))
     return 8 / (3 * pi**4) * (2 / pi)**(1 / 3) * (2**(7/6) * 3**(2/3) * pi**(-5 / 3) * theta(T)**(1/2) * volume(rho, 1)**(2/3) * PHI[0]**2)**(- 4 / 3) * (HI[N] * integral_1_2(PHI[N]) + igrek(PHI[N]))
 
 
-print(delta_P(10 ** 3 / 36.7493224786, 1.0 / (8.923608963522 * 0.01 * 10 ** (- 4))))
