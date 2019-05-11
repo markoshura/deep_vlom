@@ -13,7 +13,7 @@ from working_progonka import progonka, X
 def hi(T, rho):
 
 
-    PHI = progonka(T, rho, 196, 79)
+    PHI = progonka(T, rho, 1, 1)
 
     const = 2**(7/6) * 3**(2/3) * pi**(-5 / 3) * theta(T)**(1/2) * volume(rho, 1) ** (2/3)
 
@@ -31,8 +31,6 @@ def hi(T, rho):
         k3 = [0] * (N + 1)
         q3 = [0] * (N + 1)
         k4 = [0] * (N + 1)
-
-        
         q4 = [0] * (N + 1)
 
         Y[N] = sigma
@@ -41,7 +39,10 @@ def hi(T, rho):
         for i in range(N, 1, -1):
 
 
-            h[i] =(- 2 * i + 1) / N**2
+            h[i] = (-2 * i + 1) / N**2
+            print("h = ", h[i])
+            print("i = ", i, "N = ", N, "sigma = ", sigma)
+
 
             k1[i] = h[i] * const * (integral_sht_1_2(PHI[i] / X[i]) * Y[i] + X[i] * igrek_sht(PHI[i] / X[i]))
 
@@ -65,7 +66,7 @@ def hi(T, rho):
 
         Z[0] = Z[1] + 1 / 3 * (Z[1] - Z[2])
         i = 1
-        h[i] = (- 2 * i + 1) / N ** 2
+        h[i] = - (- 2 * i + 1) / N ** 2
 
         k1[i] = h[i] * const * (1 / 2 * integral_minus_1_2(PHI[i] / X[i]) * Y[i] + X[i] * igrek_sht(PHI[i] / X[i]))
 
@@ -87,6 +88,7 @@ def hi(T, rho):
 
         Y[i - 1] = Y[i] + (q1[i] + 2 * q2[i] + 2 * q3[i] + q4[i]) / 6
 
+
         return Y
 
     def sigma_2(sigma_0, sigma_1):
@@ -96,13 +98,9 @@ def hi(T, rho):
         return sigma_1 - (sigma_1 - sigma_0) * HI1[0] / (HI1[0] - HI0[0])
 
 
-    sigma_2 = sigma_2(100, -100)
+    sigma_22 = sigma_2(100, -100)
+
+    return(hi_function(sigma_22))
+print(hi(0.001, 1))
 
 
-
-
-    return hi_function(sigma_2)
-
-
-
-print(hi(1, 1))
