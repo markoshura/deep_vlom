@@ -1,12 +1,12 @@
 from bilinear_interpolation import bilinear_interpolation
+from ionic_contribution import  ionic_contribution_pressure
+from cold_curve import cold_curve_pressure
+from Cell import volume
 
-T = 100
-rho = 0.01
-n = 100
-cold_curve = [[0 for value in range(n + 1)] for j in range(2)]
+#cold_curve = [[0 for value in range(n + 1)] for j in range(2)]
 #Интерполируем тепловой вклад
 
-bilinear_interpolation(T, rho)
+#bilinear_interpolation(T, rho)
 
 #Из функции делаем ключ-значение
 
@@ -33,8 +33,6 @@ bilinear_interpolation(T, rho)
 #
 
 
-#Прибавляем ионный вклад
+def state_function(T, rho, Atom_weight):
 
-def state_function(T, rho):
-
-    return bilinear_interpolation(T, rho) + interp_cold_curve(rho) + ion(T, rho)
+    return bilinear_interpolation(T, rho) + ionic_contribution_pressure(T, volume(rho, Atom_weight)) + cold_curve_pressure(volume(rho, Atom_weight))
