@@ -32,7 +32,7 @@ sheet = wb.get_sheet_by_name('energy_ferrum_исходник')
 #print(c.coordinate)
 
 
-def bilinear_interpolation(T, rho):
+def bilinear_interpolation_pressure(T, rho):
     x1 = 0
     x2 = 0
     y1 = 0

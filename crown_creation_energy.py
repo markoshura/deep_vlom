@@ -1,4 +1,4 @@
-from bilinear_interpolation import bilinear_interpolation
+from bilinear_interpolation_energy import bilinear_interpolation_energy
 from ionic_contribution import ionic_contribution_energy
 from cold_curve import cold_curve_energy
 from Cell import volume
@@ -40,4 +40,4 @@ bilinear_interpolation(T, rho)
 
 def state_function(T, rho, Atom_weight):
 
-    return bilinear_interpolation(T, rho) + ionic_contribution_energy(T, volume(rho, Atom_weight)) + cold_curve_energy(volume(rho, Atom_weight))
+    return bilinear_interpolation_energy(T, rho) + ionic_contribution_energy(T, volume(rho, Atom_weight)) + cold_curve_energy(volume(rho, Atom_weight))

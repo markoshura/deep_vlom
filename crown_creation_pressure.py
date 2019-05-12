@@ -1,4 +1,4 @@
-from bilinear_interpolation import bilinear_interpolation
+from bilinear_interpolation_pressure import bilinear_interpolation_pressure
 from ionic_contribution import  ionic_contribution_pressure
 from cold_curve import cold_curve_pressure
 from Cell import volume
@@ -35,4 +35,4 @@ from Cell import volume
 
 def state_function(T, rho, Atom_weight):
 
-    return bilinear_interpolation(T, rho) + ionic_contribution_pressure(T, volume(rho, Atom_weight)) + cold_curve_pressure(volume(rho, Atom_weight))
+    return bilinear_interpolation_pressure(T, rho) + ionic_contribution_pressure(T, volume(rho, Atom_weight)) + cold_curve_pressure(volume(rho, Atom_weight))
