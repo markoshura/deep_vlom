@@ -10,6 +10,8 @@ B = 0.5
 D = 0.35667
 R = 8.31
 def ionic_contribution_energy(T, V):
+    #F - T * dF / dT
+
     sigma = V_0 / V
     f1 = - exp(-teta(V) / T - (T_a * sigma**(2 / 3) / T)**(1 / 2))
     f2 = -teta(V) / T
@@ -27,7 +29,7 @@ def ionic_contribution_energy(T, V):
     return 3 * R * T * log(1 + f1) - T * dF_T
 
 def ionic_contribution_pressure(T, V):
-    #дифференциал F с минусом
+    # - dF / dV
 
     sigma = V_0 / V
     f1 = - exp(-teta(V) / T - (T_a * sigma**(2 / 3) / T)**(1 / 2))
