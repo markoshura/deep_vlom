@@ -33,6 +33,6 @@ from Cell import volume
 #
 
 
-def state_function(T, rho, Atom_weight):
+def state_function_pressure(T, rho, Atom_weight):
 
     return bilinear_interpolation_pressure(T, rho) + ionic_contribution_pressure(T, volume(rho, Atom_weight)) + cold_curve_pressure(volume(rho, Atom_weight))
