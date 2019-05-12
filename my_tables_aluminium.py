@@ -7,11 +7,11 @@ from working_progonka import progonka
 m = 401
 n = 501
 
-#z = 13
-#Atom_weight = 26
+z = 13
+Atom_weight = 26
 
-z = 79
-Atom_weight = 196
+#z = 79
+#Atom_weight = 196
 
 TABLE_E = [[0 for i in range(m + 1)] for j in range(n + 2)]
 TABLE_E[0][1] = - 2.000
@@ -39,8 +39,8 @@ for i in range(1, n + 2):
     for j in range(1, m + 1):
         #T_h = 10 ** TABLE_E[i][0] / z**(4 / 3)
         #rho_h = 10 ** TABLE_E[0][j] * Na * 11.19 * 1.4818 * 10**(-25) / Atom_weight / z
-        T_h = 0.001/ z**(4 / 3)
-        rho_h = 1 * Na * 11.19 * 1.4818 * 10**(-25) / Atom_weight / z
+        T_h = 36.4 / z**(4 / 3)
+        rho_h = 100 * Na * 11.19 * 1.4818 * 10**(-25) / Atom_weight / z
         PHI = progonka(T_h, rho_h, 1, 1)
         TABLE_E[i][j] = Energy(T_h, rho_h, 1, 1, PHI) * z ** (7 / 3)
         #TABLE_P[i][j] = P(T_h, rho_h, PHI) * z ** (10 / 3)

@@ -102,6 +102,6 @@ def hi(T, rho):
     sigma_22 = sigma_2(100, -100)
 
     return(hi_function(sigma_22))
-#print(hi(0.001, 1))
+print(hi(0.001, 1))
 
 
