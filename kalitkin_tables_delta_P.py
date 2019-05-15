@@ -1,6 +1,4 @@
 from math import log10
-
-from working_progonka import progonka
 from corrections_P import delta_P
 from hi_function import hi
 from Changing_parameters import N
@@ -39,3 +37,9 @@ for i in range(len(TABLE_P)):
     for j in range(len(TABLE_P[i])):
         print(TABLE_P[i][j], end=' ')
     print()
+
+
+
+
+
+

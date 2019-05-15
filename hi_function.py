@@ -9,6 +9,7 @@ from Cell import z_0, r_0, volume, theta
 from working_progonka import progonka, X
 
 
+
 #ЗАМЕНА ПЕРЕМЕННЫХ: Y - ХИ, Z - ПРОИЗВОДНАЯ ХИ
 def hi(T, rho):
 
@@ -95,13 +96,12 @@ def hi(T, rho):
     def sigma_2(sigma_0, sigma_1):
         HI1 = hi_function(sigma_1)
         HI0 = hi_function(sigma_0)
-        print("sigma = ", sigma_1 - (sigma_1 - sigma_0) * HI1[0] / (HI1[0] - HI0[0]))
+        #print("sigma = ", sigma_1 - (sigma_1 - sigma_0) * HI1[0] / (HI1[0] - HI0[0]))
         return sigma_1 - (sigma_1 - sigma_0) * HI1[0] / (HI1[0] - HI0[0])
 
 
     sigma_22 = sigma_2(100, -100)
 
     return(hi_function(sigma_22))
-print(hi(0.001, 1))
 
 

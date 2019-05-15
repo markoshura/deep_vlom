@@ -19,7 +19,6 @@ TABLE_E[1][0] = 2.000
 TABLE_E[n + 1][0] = -9.000
 for j in range(2, m + 1):
     TABLE_E[0][j] = TABLE_E[0][1] + (j - 1) * 0.01
-
 for i in range(2, n + 1):
     TABLE_E[i][0] = TABLE_E[1][0] + (i - 1) * (-0.02)
 
@@ -46,7 +45,7 @@ for i in range(1, n + 2):
         #TABLE_P[i][j] = P(T_h, rho_h, PHI) * z ** (10 / 3)
         TABLE_P[i][j] = delta_P(T_h, rho_h) * z ** (8 / 3)
 
-        print("e =", TABLE_E[i][j], "p =" , TABLE_P[i][j])
+        print("e =", TABLE_E[i][j], "p = ", TABLE_P[i][j])
 
 f = open('energy_aluminium.txt', 'w')
 for i in range(len(TABLE_E)):

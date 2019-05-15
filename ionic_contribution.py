@@ -1,17 +1,16 @@
 from math import exp, log
 from scipy import arctan
-
+from Cell import volume
 V_0 = 0.3687
-T_a = 0.00089443  # KK??????? Спросить Максима. 1 эв = 1.1604521 * 10**4 К
+T_a = 0.00089443 * 10**4 * 1.1604521 # KK??????? Спросить Максима. 1 эв = 1.1604521 * 10**4 К
 
-teta_0 = 0.2  # kK
+teta_0 = 0.2 * 10**4 * 1.1604521 # kK спросить
 gamma_0 = 1.95
 B = 0.5
 D = 0.35667
 R = 8.31
 def ionic_contribution_energy(T, V):
     #F - T * dF / dT
-
     sigma = V_0 / V
     f1 = - exp(-teta(V) / T - (T_a * sigma**(2 / 3) / T)**(1 / 2))
     f2 = -teta(V) / T
@@ -54,4 +53,5 @@ def ionic_contribution_pressure(T, V):
 
 def teta(V):
     sigma = V_0 / V
-    return teta_0 * sigma**(2 / 3) * exp((gamma_0 - 2 / 3) * (B**2 + D**2) / B * arctan(B * log(sigma) / (B**2 + D *(log(sigma) + D))))
+    return teta_0 * sigma**(2 / 3) * exp((gamma_0 - 2 / 3) * (B**2 + D**2) / B * arctan(B * log(sigma) / (B**2 + D * (log(sigma) + D))))
+#print(ionic_contribution_pressure(100, volume(0.1, 56)))

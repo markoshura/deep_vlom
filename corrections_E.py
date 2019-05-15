@@ -1,4 +1,4 @@
-from hi_function import hi, Y, G
+from hi_function import hi
 from working_progonka import progonka, X
 from Dirak_functions import integral_1_2, igrek
 from Cell import theta
@@ -9,9 +9,7 @@ from Changing_parameters import N
 def delta_E(T, rho, z):
     G = [(i / N) for i in range(N + 1)]
 
-    hi(T, rho, Y, G)
-
-    HI = Y
+    HI = hi(T, rho, Y, G)
     DIFF_HI = G
     PHI = progonka(T, rho, 1, 1)
 
@@ -66,5 +64,5 @@ def delta_E(T, rho, z):
 #           subfunc2.append(X[i] * HI[i] * integral_1_2(PHI[i] / X[i])+2 * X[i]**2 * igrek(PHI[i] / X[i]))
 #       return integrate.trapz(subfunc1, subx) + integrate.trapz(subfunc2, nadx)
 
-    return  E_integrals(T,rho) + 0.2690017 * z **(5/3) + z * (2 * theta(T)**(1 / 2) / 6 / pi * DIFF_HI[0])
+    return  E_integrals(T, rho) + 0.2690017 * z **(5/3) + z * (2 * theta(T)**(1 / 2) / 6 / pi * DIFF_HI[0])
 

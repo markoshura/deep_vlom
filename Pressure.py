@@ -2,7 +2,7 @@
 
 import matplotlib.pyplot as plt
 
-from math import pi
+from math import pi, log10
 from Dirak_functions import integral_3_2
 from Cell import volume, theta,  rho_e
 from Changing_parameters import N
@@ -80,3 +80,5 @@ def P(T, rho, PHI):
 #plt.show()
 
 #print(P_e(Temperature_system, rho_system))
+
+#print(log10(P(10**(3), 10**(-4), PHI = progonka(10**3, 10**(-4), 1, 1))))

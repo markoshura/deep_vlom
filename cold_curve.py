@@ -1,4 +1,5 @@
 from math import log
+from Cell import volume
 a = [0 for i in range(4)]
 b = [0 for i in range(3)]
 a[0] = 3785.043
@@ -33,5 +34,8 @@ def cold_curve_pressure(V):
         summ_2 += b[i] / i * (i / 3 * (V_0_c / V)**(i / 3 - 1) * (-V_0_c / V**2))
 
     return - (a[0] * V_0_c * V / V_0_c * (- V_0_c / V**2) - 3 * V_0_c * summ_1 + 3 * V_0_c * summ_2)
+
+
+print(cold_curve_energy(volume(10, 56)))
 
 

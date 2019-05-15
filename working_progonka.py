@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 from math import pi
 from Changing_parameters import N, Temperature_system, rho_system
-from Dirak_functions import integral_1_2, integral_minus_1_2
+from Dirak_functions import integral_1_2, integral_minus_1_2, igrek, integral_3_2_1
 #from Atom_parameters import z
 from Cell import r_0, theta, eta_0
 
@@ -96,10 +96,6 @@ def progonka(T, rho, Atom_weight, z):
 def eta(T, rho, Atom_weight, z):
     PHI = progonka(T, rho, Atom_weight, z)
     return - PHI[N]
-
-
-
-
 
 
 
