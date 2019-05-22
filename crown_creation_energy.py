@@ -40,5 +40,5 @@ from Cell import volume
 
 def state_function_energy(T, rho, Atom_weight):
 
-    return bilinear_interpolation_energy(T, rho) + ionic_contribution_energy(T, volume(rho, Atom_weight)) + cold_curve_energy(volume(rho, Atom_weight))
+    return 2.626 * 10**3 / Atom_weight * bilinear_interpolation_energy(T, rho) + ionic_contribution_energy(T, volume(rho, Atom_weight)) + cold_curve_energy(volume(rho, Atom_weight))
 
