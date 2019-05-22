@@ -7,7 +7,7 @@ from scipy import integrate
 from Changing_parameters import N
 from Dirak_functions import integral_3_2
 from Cell import volume, theta, r_0
-from working_progonka import X, eta
+from working_progonka import X, eta, progonka
 
 
 Z = [(i / N) for i in range(N + 1)]
@@ -15,9 +15,9 @@ Z = [(i / N) for i in range(N + 1)]
 
 
 
-def Energy(T, rho, z, Atom_weight, PHI):
+def Energy(T, rho, z, Atom_weight):
 
-    #PHI = progonka(T, rho, 1, 1)
+    PHI = progonka(T, rho, Atom_weight, z)
 
     # ВСПОМ. ИНТЕГРАЛ
     def E_sub_int(T, rho):
