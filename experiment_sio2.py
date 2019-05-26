@@ -32,5 +32,6 @@ plt.title('Экспериментальные данные по ударному
 #метки x и y
 plt.xlabel('sigma')
 plt.ylabel('P, GPa')
+plt.savefig('experiment_sio2')
 #отображение графика
 plt.show()
