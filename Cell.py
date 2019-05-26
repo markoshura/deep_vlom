@@ -32,7 +32,8 @@ def z_0(T, rho, Atom_weight):
 
 # Средний радиус атомной ячейки
 def r_0(rho, Atom_weight):
-    return (1 / a_0) * (3 / (4 * pi) * Atom_weight / (rho * Na))**(1/3)
+    #return (1 / a_0) * (3 / (4 * pi) * Atom_weight / (rho * Na))**(1/3)
+    return 1.388 * (Atom_weight / rho) ** (1 / 3)
 
 
 # Объём атомной ячейки

@@ -26,7 +26,7 @@ for i in range(1, n + 1):
         rho_now = 1.0 / (8.923608963522 * 0.01 * 10 ** TABLE_E[0][j])
         # print(T_now, rho_now)
         # print(P(T_now, rho_now))
-        TABLE_E[i][j] = log10(Energy(T_now, rho_now))
+        TABLE_E[i][j] = log10(Energy(T_now, rho_now, 1, 1))
         print("T = ", TABLE_E[i][0], "rh0 = ", TABLE_E[0][j], "LG E = ", TABLE_E[i][j])
 #T_now = 10 ** (-0.167) /36.749
 #rho_now = 1.0 / (8.923608963522 * 0.01 * 10 ** 4)

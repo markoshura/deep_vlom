@@ -54,4 +54,5 @@ def ionic_contribution_pressure(T, V):
 def teta(V):
     sigma = V_0 / V
     return teta_0 * sigma**(2 / 3) * exp((gamma_0 - 2 / 3) * (B**2 + D**2) / B * arctan(B * log(sigma) / (B**2 + D * (log(sigma) + D))))
-#print(ionic_contribution_pressure(100, volume(0.1, 56)))
+
+print(ionic_contribution_pressure(1, volume(1, 1)))
