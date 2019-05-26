@@ -31,3 +31,5 @@ plt.legend()
 plt.savefig('compare_energy')
 plt.show()
 
+
+
