@@ -94,57 +94,57 @@ def Energy(T, rho, z, Atom_weight):
 #print("T_h = ", T / z**(4 / 3))
 #print("rho_h = ", rho * Na * 11.19 * 1.4818 * 10**(-25) / A / z )
 #print("E = ", Energy(T_h, rho_h, 1, 1) * z**(7 / 3))
-ENERGY_ISOTHERM_RHO = [[], [], [], [], []]
-RHO = [[], [], [], [], []]
-k = -3
-
-while k < 2:
-    rho_is = 0.001
-    for i in (0.001, 0.01, 0.1, 1., 10.):
-        while rho_is < i * 10:
-            RHO[k + 3].append(rho_is)
-            ENERGY_ISOTHERM_RHO[k+3].append(Energy(10**k, rho_is, 1, 1))
-            rho_is += i
-    k += 1
-
-for i in range(5):
-    plt.plot(RHO[i], ENERGY_ISOTHERM_RHO[i])
-
-plt.xscale('log')
-plt.yscale('log')
-plt.xlabel('rho')
-plt.ylabel('E')
-plt.title('ENERGY isotherm')
-plt.grid('true')
-plt.savefig('enertherm')
-plt.show()
-
-
-ENERGY_ISOHORE_T = [[], [], [], [], []]
-TT = [[], [], [], [], []]
-k = -3
-
-while k < 2:
-    T_is = 0.001
-    for i in (0.001, 0.01, 0.1, 1., 10.):
-        while T_is < i * 10:
-            TT[k+3].append(T_is)
-            ENERGY_ISOHORE_T[k+3].append(Energy(T_is, 10**k, 1, 1))
-            T_is += i
-
-    k += 1
-
-for i in range(5):
-    plt.plot(TT[i], ENERGY_ISOHORE_T[i])
-
-
-##E_sub_int(T, rho)
-plt.xscale('log')
-plt.yscale('log')
-plt.xlabel("T")
-plt.ylabel('E')
-plt.grid('true')
-plt.title('ENERGY isohore')
-###plt.axis((0, 10000,0,950000))
-plt.savefig('enerhore')
-plt.show()
+#ENERGY_ISOTHERM_RHO = [[], [], [], [], []]
+#RHO = [[], [], [], [], []]
+#k = -3
+#
+#while k < 2:
+#    rho_is = 0.001
+#    for i in (0.001, 0.01, 0.1, 1., 10.):
+#        while rho_is < i * 10:
+#            RHO[k + 3].append(rho_is)
+#            ENERGY_ISOTHERM_RHO[k+3].append(Energy(10**k, rho_is, 1, 1))
+#            rho_is += i
+#    k += 1
+#
+#for i in range(5):
+#    plt.plot(RHO[i], ENERGY_ISOTHERM_RHO[i])
+#
+#plt.xscale('log')
+#plt.yscale('log')
+#plt.xlabel('rho')
+#plt.ylabel('E')
+#plt.title('ENERGY isotherm')
+#plt.grid('true')
+#plt.savefig('enertherm')
+#plt.show()
+#
+#
+#ENERGY_ISOHORE_T = [[], [], [], [], []]
+#TT = [[], [], [], [], []]
+#k = -3
+#
+#while k < 2:
+#    T_is = 0.001
+#    for i in (0.001, 0.01, 0.1, 1., 10.):
+#        while T_is < i * 10:
+#            TT[k+3].append(T_is)
+#            ENERGY_ISOHORE_T[k+3].append(Energy(T_is, 10**k, 1, 1))
+#            T_is += i
+#
+#    k += 1
+#
+#for i in range(5):
+#    plt.plot(TT[i], ENERGY_ISOHORE_T[i])
+#
+#
+###E_sub_int(T, rho)
+#plt.xscale('log')
+#plt.yscale('log')
+#plt.xlabel("T")
+#plt.ylabel('E')
+#plt.grid('true')
+#plt.title('ENERGY isohore')
+####plt.axis((0, 10000,0,950000))
+#plt.savefig('enerhore')
+#plt.show()
