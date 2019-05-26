@@ -27,58 +27,58 @@ def P(T, rho, Atom_weight, z):
     return 32 / (3 * pi**3) * (2 / pi)**(2 / 3) * (2**(7/6) * 3**(2/3) * pi**(-5 / 3) * theta(T)**(1/2) * volume(rho, 1) **(2/3) * (PHI[0])**2)**(-5 / 3) * integral_3_2(PHI[N])
 
 
-PRESSURE_ISOTHERM_RHO = [[], [], [], [], []]
-RHO = [[], [], [], [], []]
-k = -3
-
-while k < 2:
-    rho_is = 0.001
-    for i in (0.001, 0.01, 0.1, 1., 10., 60.):
-        while rho_is < i * 10:
-            RHO[k + 3].append(rho_is)
-            PRESSURE_ISOTHERM_RHO[k+3].append(P(10**k, rho_is, 1, 1))
-            rho_is += i
-    k += 1
-
-for i in range(5):
-    plt.plot(RHO[i], PRESSURE_ISOTHERM_RHO[i])
-
-
-plt.xscale('log')
-plt.yscale('log')
-plt.xlabel('rho')
-plt.ylabel('P')
-plt.title('PRESSURE isotherm')
-plt.grid('true')
-plt.savefig('prestherm')
-plt.show()
-
-
-PRESSURE_ISOHORE_T = [[], [], [], [], []]
-TT = [[], [], [], [], []]
-k = -3
-
-while k < 2:
-    T_is = 0.001
-    for i in (0.001, 0.01, 0.1, 1.):
-        while T_is < i * 10:
-            TT[k+3].append(T_is)
-            PRESSURE_ISOHORE_T[k+3].append(P(T_is, 10**k, 1, 1))
-            T_is += i
-    k += 1
-
-for i in range(5):
-    plt.plot(TT[i], PRESSURE_ISOHORE_T[i])
-
-plt.xscale('log')
-plt.yscale('log')
-plt.xlabel("T")
-plt.ylabel('P')
-plt.grid('true')
-plt.title('PRESSURE isohore')
-plt.savefig('preshore')
-plt.show()
-
-#print(P_e(Temperature_system, rho_system))
-
-#print(log10(P(10**(3), 10**(-4), PHI = progonka(10**3, 10**(-4), 1, 1))))
+#PRESSURE_ISOTHERM_RHO = [[], [], [], [], []]
+#RHO = [[], [], [], [], []]
+#k = -3
+#
+#while k < 2:
+#    rho_is = 0.001
+#    for i in (0.001, 0.01, 0.1, 1., 10., 60.):
+#        while rho_is < i * 10:
+#            RHO[k + 3].append(rho_is)
+#            PRESSURE_ISOTHERM_RHO[k+3].append(P(10**k, rho_is, 1, 1))
+#            rho_is += i
+#    k += 1
+#
+#for i in range(5):
+#    plt.plot(RHO[i], PRESSURE_ISOTHERM_RHO[i])
+#
+#
+#plt.xscale('log')
+#plt.yscale('log')
+#plt.xlabel('rho')
+#plt.ylabel('P')
+#plt.title('PRESSURE isotherm')
+#plt.grid('true')
+#plt.savefig('prestherm')
+#plt.show()
+#
+#
+#PRESSURE_ISOHORE_T = [[], [], [], [], []]
+#TT = [[], [], [], [], []]
+#k = -3
+#
+#while k < 2:
+#    T_is = 0.001
+#    for i in (0.001, 0.01, 0.1, 1.):
+#        while T_is < i * 10:
+#            TT[k+3].append(T_is)
+#            PRESSURE_ISOHORE_T[k+3].append(P(T_is, 10**k, 1, 1))
+#            T_is += i
+#    k += 1
+#
+#for i in range(5):
+#    plt.plot(TT[i], PRESSURE_ISOHORE_T[i])
+#
+#plt.xscale('log')
+#plt.yscale('log')
+#plt.xlabel("T")
+#plt.ylabel('P')
+#plt.grid('true')
+#plt.title('PRESSURE isohore')
+#plt.savefig('preshore')
+#plt.show()
+#
+##print(P_e(Temperature_system, rho_system))
+#
+##print(log10(P(10**(3), 10**(-4), PHI = progonka(10**3, 10**(-4), 1, 1))))
