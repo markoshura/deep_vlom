@@ -59,7 +59,7 @@ plt.scatter(X_13, Y_13,  marker='x', facecolors='none', edgecolors='b')
 plt.scatter(X_14, Y_14,  marker='H', facecolors='none', edgecolors='b')
 
 #диапазон осей
-plt.xlim(1,5)
+plt.xlim(1,6)
 plt.ylim(1,10000000)
 plt.yscale('log')
 #заголовки

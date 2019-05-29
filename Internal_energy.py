@@ -9,7 +9,9 @@ from Dirak_functions import integral_3_2
 from Cell import volume, theta, r_0
 from working_progonka import X, eta, progonka
 
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
+from Tabular_values import Na
+
 
 Z = [(i / N) for i in range(N + 1)]
 
@@ -83,68 +85,75 @@ def Energy(T, rho, z, Atom_weight):
 
     return E(T , rho)
 
+ENERGY_ISOTHERM_RHO = [[], [], [], [], []]
+RHO = [[], [], [], [], []]
+k = -3
 
-#print(Energy(36.4, 100, 13, 26))
-#z = 13
-#A = 26
-#T = 36.4
-#rho = 100
-#T_h = T / z**(4 / 3)
-#rho_h = rho * Na * 11.19 * 1.4818 * 10**(-25) / A / z
-#print("T_h = ", T / z**(4 / 3))
-#print("rho_h = ", rho * Na * 11.19 * 1.4818 * 10**(-25) / A / z )
-#print("E = ", Energy(T_h, rho_h, 1, 1) * z**(7 / 3))
-#ENERGY_ISOTHERM_RHO = [[], [], [], [], []]
-#RHO = [[], [], [], [], []]
-#k = -3
-#
-#while k < 2:
-#    rho_is = 0.001
-#    for i in (0.001, 0.01, 0.1, 1., 10.):
-#        while rho_is < i * 10:
-#            RHO[k + 3].append(rho_is)
-#            ENERGY_ISOTHERM_RHO[k+3].append(Energy(10**k, rho_is, 1, 1))
-#            rho_is += i
-#    k += 1
-#
-#for i in range(5):
-#    plt.plot(RHO[i], ENERGY_ISOTHERM_RHO[i])
-#
-#plt.xscale('log')
-#plt.yscale('log')
-#plt.xlabel('rho')
-#plt.ylabel('E')
-#plt.title('ENERGY isotherm')
-#plt.grid('true')
-#plt.savefig('enertherm')
-#plt.show()
-#
-#
-#ENERGY_ISOHORE_T = [[], [], [], [], []]
-#TT = [[], [], [], [], []]
-#k = -3
-#
-#while k < 2:
-#    T_is = 0.001
-#    for i in (0.001, 0.01, 0.1, 1., 10.):
-#        while T_is < i * 10:
-#            TT[k+3].append(T_is)
-#            ENERGY_ISOHORE_T[k+3].append(Energy(T_is, 10**k, 1, 1))
-#            T_is += i
-#
-#    k += 1
-#
-#for i in range(5):
-#    plt.plot(TT[i], ENERGY_ISOHORE_T[i])
-#
-#
-###E_sub_int(T, rho)
-#plt.xscale('log')
-#plt.yscale('log')
-#plt.xlabel("T")
-#plt.ylabel('E')
-#plt.grid('true')
-#plt.title('ENERGY isohore')
-####plt.axis((0, 10000,0,950000))
-#plt.savefig('enerhore')
-#plt.show()
+while k < 2:
+    rho_is = 0.001
+    for i in (0.001, 0.01, 0.1, 1., 10.):
+        while rho_is < i * 10:
+            RHO[k + 3].append(rho_is)
+            T_h = 10**k / 13**(4 / 3)
+            rho_h = rho_is * Na * 11.19 * 1.4818 * 10**(-25) / 26 / 13
+            ENERGY_ISOTHERM_RHO[k+3].append(2.626 * 10**3 / 26 * Energy(T_h, rho_h, 1, 1)*13**(7 / 3))
+            rho_is += i
+    k += 1
+
+
+
+plt.plot(RHO[0], ENERGY_ISOTHERM_RHO[0], label="k = - 3")
+plt.plot(RHO[1], ENERGY_ISOTHERM_RHO[1], label="k = - 2")
+plt.plot(RHO[2], ENERGY_ISOTHERM_RHO[2], label="k = -1")
+plt.plot(RHO[3], ENERGY_ISOTHERM_RHO[3], label="k = 0")
+plt.plot(RHO[4], ENERGY_ISOTHERM_RHO[4], label="k = 1")
+
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel('rho, г / см^3')
+plt.ylabel('E, кДж / г')
+plt.title('Изотермы энергии алюминия')
+plt.grid('true')
+plt.legend()
+plt.savefig('enertherm')
+plt.show()
+
+
+ENERGY_ISOHORE_T = [[], [], [], [], []]
+TT = [[], [], [], [], []]
+k = -3
+
+while k < 2:
+    T_is = 0.001
+    for i in (0.001, 0.01, 0.1, 1., 10.):
+        while T_is < i * 10:
+            TT[k+3].append(T_is)
+            T_h = T_is / 13**(4 / 3)
+            rho_h = 10**k * Na * 11.19 * 1.4818 * 10**(-25) / 26 / 13
+
+            ENERGY_ISOHORE_T[k+3].append(2.626 * 10**3 * Energy(T_h, rho_h, 1, 1) * 13**(7 / 3))
+            T_is += i
+
+    k += 1
+
+
+plt.plot(TT[0], ENERGY_ISOHORE_T[0], label="k = - 3")
+plt.plot(TT[1], ENERGY_ISOHORE_T[1], label="k = - 2")
+plt.plot(TT[2], ENERGY_ISOHORE_T[2], label="k = -1")
+plt.plot(TT[3], ENERGY_ISOHORE_T[3], label="k = 0")
+plt.plot(TT[4], ENERGY_ISOHORE_T[4], label="k = 1")
+
+
+
+
+##E_sub_int(T, rho)
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel("T , кэВ")
+plt.ylabel('E, кДж / г')
+plt.grid('true')
+plt.title('Изохоры энергии алюминия')
+plt.legend()
+###plt.axis((0, 10000,0,950000))
+plt.savefig('enerhore')
+plt.show()

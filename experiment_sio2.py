@@ -24,8 +24,8 @@ plt.scatter(X_3, Y_3, color = 'blue', marker='X')
 #plt.scatter(X_2, Y_2,  marker='P')
 
 #диапазон осей
-plt.xlim(1,4)
-plt.ylim(1,10000)
+plt.xlim(1,5)
+plt.ylim(1,10000000)
 plt.yscale('log')
 #заголовки
 plt.title('Экспериментальные данные по ударному сжатию кварца')

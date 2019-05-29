@@ -2,6 +2,7 @@ from math import pi, log, e, log10
 import matplotlib.pyplot as plt
 from Changing_parameters import N
 from Dirak_functions import integral_1_2, integral_3_2
+from Tabular_values import Na
 
 from Atom_parameters import Atom_weight,z
 from Cell import z_0, r_0, volume, theta
@@ -16,7 +17,7 @@ for i in range(N+1):
 
 
 
-def S(T, rho):
+def S(T, rho, Atom_weight, z):
 
 
     PHI = progonka(T, rho, 1, 1)
@@ -55,9 +56,9 @@ def S(T, rho):
     ##ПОЛНАЯ ЭНТРОПИЯ
 
     def S(T,rho):
-        return S_e(T, rho) + 3/2 * log(1836 * Atom_weight * theta(T) * volume(rho, 1) ** (2 / 3) / 2 / pi, e) + 5/2
+        return 0.9648 * 10**2 / Atom_weight * (S_e(T, rho) + 3/2 * log(1836 * Atom_weight * theta(T) * volume(rho, 1) ** (2 / 3) / 2 / pi, e) + 5 / 3)
 
-    return S_e(T, rho)
+    return S(T, rho)
 
 
 ENTROPHY_ISOTHERM_RHO = [[], [], [], [], []]
@@ -70,9 +71,10 @@ while k < 2:
     for i in (0.001, 0.01, 0.1, 1., 10., 60.):
         while rho_is < i * 10:
             RHO[k + 3].append(rho_is)
-            ENTROPHY_ISOTHERM_RHO[k+3].append(S(10**k, rho_is))
-
-            print(rho_is, S(10**k, rho_is))
+            T_h = 10**k
+            rho_h = rho_is
+            ENTROPHY_ISOTHERM_RHO[k+3].append(S(T_h, rho_h, 1, 1))
+            #print(rho_is, S(T_h, rho_h, 1, 1))
             rho_is += i
     k += 1
 
@@ -85,7 +87,7 @@ plt.xlabel('rho')
 plt.ylabel('S')
 plt.title('ENTROPHY isotherm')
 plt.grid('true')
-# plt.savefig('entrophyrtherm')
+plt.savefig('entrophyrtherm')
 plt.show()
 
 
@@ -98,8 +100,10 @@ while k < 2:
     for i in (0.001, 0.01, 0.1, 1., 10.):
         while T_is < i * 10:
             TT[k+3].append(T_is)
-            ENTROPHY_ISOHORE_T[k+3].append(S(T_is, 10**k))
-            print(T_is, S(T_is, 10**k))
+            T_h = T_is
+            rho_h = 10**k
+            ENTROPHY_ISOHORE_T[k+3].append(S(T_h, rho_h, 1, 1))
+            #print(T_is, S(T_is, 10**k))
             T_is += i
 
     k += 1
@@ -114,8 +118,8 @@ plt.ylabel('S')
 plt.grid('true')
 plt.title('ENTROPHY isohore')
 ###plt.axis((0, 10000,0,950000))
-### plt.savefig('entrophyhore')
+plt.savefig('entrophyhore')
 plt.show()
 
 
-print(log10(S(10 ** 3 / 36.7493224786, 1.0 / (8.923608963522 * 0.01 * 10 ** (- 4)))))
+#print(log10(S(10 ** 3 / 36.7493224786, 1.0 / (8.923608963522 * 0.01 * 10 ** (- 4)))))
